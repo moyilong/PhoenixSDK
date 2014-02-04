@@ -1,0 +1,1 @@
+mkbootimg --kernel boot.img-zImage --ramdisk ramdisk.cpio.gz --cmdline 'androidboot.hardware=atlas40' --pagesize 4096 --base 00200000 -o boot.img
