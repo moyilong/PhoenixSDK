@@ -1,8 +1,7 @@
 @echo off
 echo zip Update Maker 2
 if not "%build%"=="" goto continue
-if not exist %out%\id echo 1000 >%out%\id
-set /p build=<%out%\id
+for /l %%f in (1000,1,9999) do if exist %out%\%%f set build=%%f
 if "%build%"=="" set build=1000
 set o_build=%build%-10
 if exist %out%\%o_build% rmdir /q /s %out%\%o_build%
