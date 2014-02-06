@@ -59,8 +59,8 @@ for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f g
 for %%f in (%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do if not exist %%f goto head_error
 echo                     Reading Kernel Head file
 if not exist %userdir% mkdir %userdir%
-for /f %%f in (%kernel%\include\head.h) do set %%f&& echo Loading Configure: %%f
-for /f %%f in (%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
+for /f %%f in (%kernel%\include\head.h;%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
+::for /f %%f in (%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
 if not exist %sdkdir%\include\info.h set secure_mode=enable&& goto skip_loadhead
 for /f %%f in (%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
 if not exist %userdir%\UserProfile.conf goto set_default_user_conf
@@ -96,7 +96,7 @@ if "%k_mode%"=="Release" set k_string=正式版
 if "%k_mode%"=="RC" set k_string=发布预览版本
 set HOST_ARCH=x86
 if exist %windir%\SysWOW64  set HOST_ARCH=amd64
-set title=%name% %version% %k_version% %host_arch% Mode
+set title=%name% with %k_version%
 echo                     Decoding User PRofile
 set PATHEXT=%PATHEXT%;%user_force_PATHEXT%
 if "%user_force_cpu_core%"=="true" set cores=%user_force_cpu_conf%
@@ -105,6 +105,9 @@ if "%cores%"=="1" set half_cores=1 && set error_code=0xf0009D3B
 set PATH=%path%;%user_force_PATH%
 :skip_loadhead
 echo                     Init Kernel %k_version% by %HOST_ARCH%
+if "%sucure_mode%"=="true" goto resume
+if not exist %kernel%\include\service.h goto resume
+for /f %%f in (%kernel%\include\service.h) do call %%f
 :resume
 if not "%host_arch%"=="amd64" call %kernel%\add_path.bat %kernel%\signtool\bin32
 if "%host_arch%"=="amd64" call %kernel%\add_path.bat %kernel%\signtool\bin64
@@ -147,6 +150,13 @@ call %kernel%\app_scan.bat
 :skip_appload
 echo 			Loading Kernel Modules
 if "%secure_mode%"=="enable" goto skip_appload2
+if not exist %appdir% if exist %sdkdir%\modules_comress.zip (
+mkdir %proc%\modules
+copy %sdkdir%\modules_compress.zip %proc%\modules\modules_compress.zip
+cd /d %proc%\modules
+zip x modules_compress.zip
+set appdir=%proc%\modules
+)
 call %kernel%\app_loader.bat
 :skip_appload2
 echo InitSystem Shell >>%sys_log%
