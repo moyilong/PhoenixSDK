@@ -15,3 +15,4 @@ skip_appcheck=false
 skip_kernelcheck=false
 S_CLR=0f
 S_MODE=100,45
+line_wide=45

@@ -6,8 +6,8 @@ echo.
 echo.
 echo.
 echo            ___         ___                ___
-echo          /      /     /   /   /\    /   /        ôàÁú Ò÷·ç
-echo         /----  /     /   /   /  \  /   /----    Kernel Init   
+echo          /      /     /   /   /\    /   /     Dragon Project 
+echo         /----  /     /   /   /  \  /   /----  Kernel Init   
 echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2014     
 echo.                                                   
 set error_code=0x00000001
@@ -89,11 +89,11 @@ echo	Reading Sign Information
 for /f "delims=#" %%f in (%sdkdir%\include\sign.h) do set %%f
 
 set k_string=unknow
-if "%k_mode%"=="Pre-Alpha" set k_string=¿ª·¢Ô¤ÀÀ°æ
-if "%k_mode%"=="Alpha" set k_string=ÄÚ²¿²âÊÔ°æ
-if "%k_mode%"=="Beta" set k_string=²âÊÔ°æ
-if "%k_mode%"=="Release" set k_string=ÕýÊ½°æ
-if "%k_mode%"=="RC" set k_string=·¢²¼Ô¤ÀÀ°æ±¾
+if "%k_mode%"=="Pre-Alpha" set k_string=ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
+if "%k_mode%"=="Alpha" set k_string=ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ô°ï¿½
+if "%k_mode%"=="Beta" set k_string=ï¿½ï¿½ï¿½Ô°ï¿½
+if "%k_mode%"=="Release" set k_string=ï¿½ï¿½Ê½ï¿½ï¿½
+if "%k_mode%"=="RC" set k_string=ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½æ±¾
 set HOST_ARCH=x86
 if exist %windir%\SysWOW64  set HOST_ARCH=amd64
 set title=%name% with %k_version%
@@ -109,6 +109,7 @@ if "%sucure_mode%"=="true" goto resume
 if not exist %kernel%\include\service.h goto resume
 for /f %%f in (%kernel%\include\service.h) do call %%f
 :resume
+for /l %%f in (1,1,%line_wide%) do set line=%line%#
 if not "%host_arch%"=="amd64" call %kernel%\add_path.bat %kernel%\signtool\bin32
 if "%host_arch%"=="amd64" call %kernel%\add_path.bat %kernel%\signtool\bin64
 set error_code=0x09905aab
@@ -162,7 +163,7 @@ call %kernel%\app_loader.bat
 echo InitSystem Shell >>%sys_log%
 set error_code=0xf00000FF
 cd /d %initdir%
-if not exist %userdir%\init.rc echo ::Ìí¼ÓÄ¬ÈÏÖ´ÐÐµÄÃüÁîµ½Õâ±ßÀ´!>%userdir%\init.rc
+if not exist %userdir%\init.rc echo ::ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Ö´ï¿½Ðµï¿½ï¿½ï¿½ï¿½îµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!>%userdir%\init.rc
 copy %userdir%\init.rc %temp%\temp.bat
 call %temp%\temp.bat
 del %temp%\temp.bat
@@ -182,14 +183,14 @@ goto end
 set error_code=0xC000000AA
 echo Warring!!!
 set error=true
-echo      ²»ÄÜ¼ÓÔØÄÚºËÄ¬ÈÏÃüÁîÐÐ
-echo      ÕâÒ»°ã¶¼ÊÇÓÉÓÚÄÚºË²»Ö§³Ö´ËÖÖÆô¶¯·½Ê½ÒýÆðµÄ
-echo      Çë¸ü»»Æô¶¯·½Ê½£¬²¢ÇÒ¼ì²éÄÚºËÍêÕûÐÔ!
+echo      ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½Úºï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+echo      ï¿½ï¿½Ò»ï¿½ã¶¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚºË²ï¿½Ö§ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+echo      ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
 goto end
 :head_error
 set error=true
 set error_code=0xf00000ff
-echo ÄÚºËÍ·¶ªÊ§
+echo ï¿½Úºï¿½Í·ï¿½ï¿½Ê§
 goto end
 :set_default_user_conf
 set error_code=0xf0007FAE
@@ -200,26 +201,26 @@ echo   Importing SDK Default Configure
 for /f %%f in (%sdkdir%\include\default.conf) do echo %%f>>%userdir%\UserProfile.conf
 echo Importing Kernel Default Configure
 for /f %%f in (%kernel%\include\default.conf) do echo %%f>>%userdir%\UserProfile.conf
-echo #Ä£¿éÉè¶¨>>%userdir%\UserProfile.conf
+echo #Ä£ï¿½ï¿½ï¿½è¶¨>>%userdir%\UserProfile.conf
 echo Importing Modules Default Configure
 for %%f in (%feature%) do if exist %appdir%\%%f\data\Default.conf cat  %appdir%\%%f\data\Default.conf > %userdir%\UserProfile.conf
 goto resume_user_conf
 :_error
 set error=true
 set error_code=0xf000ffff
-echo ÄÚºË³õÊ¼»¯Ê§°Ü!
-echo ·ÃÎÊÆô¶¯Æ÷½Ó¿ÚÊÇÊ§°Ü
+echo ï¿½ÚºË³ï¿½Ê¼ï¿½ï¿½Ê§ï¿½ï¿½!
+echo ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 pause>nul
 goto end
 :hash_error
 set error=true
 set error_code=0xfffff000
-echo ÄÚºË×Ô¼ìÊ§°Ü
+echo ï¿½Úºï¿½ï¿½Ô¼ï¿½Ê§ï¿½ï¿½
 goto end
 :sign_error
 set error=true
 set error_code=0xfDDD69EF
-echo ²Ù×÷Ç©ÃûÎÄ¼þÊ§°Ü!
+echo ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½Ä¼ï¿½Ê§ï¿½ï¿½!
 goto end
 :otr_set
 set error_code=0xffDf005A
