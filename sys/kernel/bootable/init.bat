@@ -128,7 +128,7 @@ if not exist %kernel%\kernel_compress.zip goto kpe
 cd /d %initdir%
 goto final
 :final
-call %kernel%\add_path.bat %proc%\kernel_path
+set path=%proc%\kernel_path;%path%
 if "%debug%"=="true" set title=Debug[%title%]
 echo                     Resume Settings
 for %%f in (%cmdline%) do (

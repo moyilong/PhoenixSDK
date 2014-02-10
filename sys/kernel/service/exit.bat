@@ -5,9 +5,10 @@ echo.
 echo.
 echo            ___         ___                ___
 echo          /      /     /   /   /\    /   /          
-echo         /----  /     /   /   /  \  /   /----    Kernel Exit 
-echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2013     
+echo         /----  /     /   /   /  \  /   /----  
+echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2014     
 echo.     
+echo	[内核]	正在退出
 doskey ec=call %kernel%\service\set_errorcode.bat
 set error_code=0xE00005DB
 echo 正在结束进程
