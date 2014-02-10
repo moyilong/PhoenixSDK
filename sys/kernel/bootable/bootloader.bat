@@ -12,6 +12,7 @@ echo 3、启动安全模式
 echo 4、启动不带扩展指令的安全模式
 echo 5、启动不带参数的模式
 echo 6、签名
+echo 7、清空Proc
 echo ==================================
 ::echo [1/2/3/4/5/6/E]
 ::set /p io=
@@ -23,6 +24,7 @@ if "%errorlevel%"=="4" goto nkp
 if "%errorlevel%"=="6" goto sign
 if "%errorlevel%"=="5" goto none
 if "%errorlevel%"=="1" goto normally
+if "%errorlevel%"=="7" goto clean_proc
 echo Unknow:%errorlevel%
 timeout /t 3
 goto menu1
@@ -69,5 +71,14 @@ goto end
 
 call %1\kernel\bootable\init.bat %1 %cmdline%
 %windir%\%1tem32\cmd.exe
+goto end1
+
+:clean_proc
+echo Cleaning Proc......
+cd /d %temp%
+for /d %%f in (PROC_*) do rmdir /q /s %%f &&echo Clean:%%f
+ping 127.0.0.1 -n 2>nul
+goto endl
+
 
 :end1
