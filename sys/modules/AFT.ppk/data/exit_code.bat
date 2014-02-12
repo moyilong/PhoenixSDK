@@ -1,2 +1,2 @@
-echo 结束ADB服务
+echo [AFT]结束ADB服务
 adb kill-server
