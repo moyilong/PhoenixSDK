@@ -72,7 +72,7 @@ echo 合成结束
 sha1sum -r %proc%\AFT >>%temp%\sha1_2
 fc %temp%\sha1_2 %temp%\sha1_1 >%log%\%build%.diff
 :__skip_donor
-if "%gloal_zipalign_skip%"=="true" goto __skip_zipalig
+if "%global_zipalign_skip%"=="true" goto __skip_zipalig
 echo 正在进行Zipalign优化
 cd /d %proc%
 mkdir app
