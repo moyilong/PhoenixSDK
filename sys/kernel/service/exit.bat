@@ -13,9 +13,9 @@ doskey ec=call %kernel%\service\set_errorcode.bat
 set error_code=0xE00005DB
 echo 正在结束进程
 echo STATUS_STOP>%proc%\stop.stat
-sleep 1
 set error_code=0xa0000fff
 for %%f in (%feature%) do if exist %appdir%\%%f\data\exit_code.bat call %appdir%\%%f\data\exit_code.bat
+for /r %proc%\shutdown_code\ %%f in (*.bat) do call %%f
 set error_code=0xE1ff00ff
 rmdir /q /s %apidir%
 set error_code=0xE1000105
