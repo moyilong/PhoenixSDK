@@ -27,12 +27,14 @@ set userdir=%initdir%\User
 set user_dir=%userdir%
 set cores=%NUMBER_OF_PROCESSORS%
 set guid=%random%%random%%random%
-set proc=%temp%\PROC_%guid%
+set proc=%temp%\tmpfs_%guid%
 set temp=%proc%\temp
 set api_dir=%proc%\common_modules_api
 mkdir %proc%
 mkdir %api_dir%
 mkdir %proc%\temp
+mkdir %proc%\ver_info
+mkdir %proc%\shutdown_code
 set cmdline=%2;%3;%4;%5;%6;%7;%8
 set log=%proc%\LogFiles
 mkdir %log%

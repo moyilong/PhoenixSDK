@@ -14,6 +14,7 @@ if exist %appdir%\%1\kernel_path_ex copy %appdir%\%1\kernel_path_ex\* %proc%\ker
 if exist %appdir%\%1\data\init.bat call %appdir%\%1\data\init.bat Kernel_init
 if exist %appdir%\%1\api echo D | xcopy /Y /E %appdir%\%1\api %api_dir%
 set feature=%feature%;%1
+set ppk_pkg=%1;%ppk_pkg%
 echo Add Modules:%1 >>%app_log%
 
 :end

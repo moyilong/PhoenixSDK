@@ -8,15 +8,6 @@ set guid=%random%%random%%random%%random%%random%%random%%random%
 :: lzh/init.bat			启动执行
 :: lzh/shutdown_code.bat	关闭代码
 ::
-::
-::
-::
-::
-::
-::
-::
-::
-::
 
 echo UnCompress
 mkdir %temp%\%guid%
@@ -28,6 +19,9 @@ call %kernel%\include.bat info.h
 echo 读取包名称:
 echo 	包名称=%return_name%
 echo	  版本=%return_version%
+
+if not exist %proc%\ver_info mkdir %proc%\ver_info
+copy info.h %proc%\ver_info\%1.h
 
 echo 处理需求..................
 for /f %%f in (exist.h) do if not exist %appdir%\%%f set support=false echo [EXT]找不到模块:%%f>>%app_log%&& goto __un_support 
@@ -42,6 +36,7 @@ if not exist %proc%\shutdown_code mkdir %proc%\shutdown_code
 if exist shutdown_code.bat copy shutdown_code.bat %proc%\shutdown_code\%1
 
 set feature=%feature%;%1
+set ext_pkg=%1;%ext_pkg%
 echo 加载结束!
 
 
