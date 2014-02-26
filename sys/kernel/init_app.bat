@@ -18,11 +18,11 @@ if not "%errorlevel%"=="0" echo Ç©Ãû¼ì²âÊ§°Ü:%1>>%app_log% &set error_code=0xa00
 
 
 for %%f in (%ppk_label%) do if exist %appdir%\%1\data\support\%%f set ppk=true
-if "%ppk%"=="true" call %kernel%\modules\ppk\init_ppk.bat %1 %%f
+if "%ppk%"=="true" set error_code=0xaff221f9 && call %kernel%\modules\ppk\init_ppk.bat %1 %%f
 if "%ppk%"=="true" goto over
 
 
-for %%f in (%ext_label%) do  if exist %appdir%\%1\pkg\%%f.lzh set ext=true
+for %%f in (%ext_label%) do  set error_code=0xaff221fa && if exist %appdir%\%1\pkg\%%f.lzh set ext=true
 
 if "%ext%"=="true" call %kernel%\modules\ppk\init_ext.bat %1 %%f
 
