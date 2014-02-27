@@ -1,0 +1,3 @@
+debug=false
+skip_appcheck=true
+skip_kernelcheck=true
