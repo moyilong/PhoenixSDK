@@ -62,7 +62,7 @@ for %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_ha
 echo                     Reading Kernel Head file
 if not exist %userdir% mkdir %userdir%
 for /f %%f in (%kernel%\include\head.h;%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
-for /f %%f in (%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
+for /f %%f in (%sdkdir%\include\config.h) do set %%f&& echo Loading Configure: %%f
 if not exist %sdkdir%\include\info.h set secure_mode=enable&& goto skip_loadhead
 for /f %%f in (%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
 if not exist %userdir%\UserProfile.conf goto set_default_user_conf
