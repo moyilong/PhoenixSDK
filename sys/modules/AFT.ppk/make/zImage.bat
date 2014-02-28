@@ -1,13 +1,18 @@
 @echo off
 echo zip Update Maker 2
 if not "%build%"=="" goto continue
-for /l %%f in (1000,1,9999) do if exist %out%\%%f set build=%%f
-if "%build%"=="" set build=1000
-set o_build=%build%-10
-if exist %out%\%o_build% rmdir /q /s %out%\%o_build%
+
+if not exist %devdir%\compile mkdir %devdir%\compile && echo LLLLLL >%devdir%\compile\1000.lzh
+
+for /l %%f in (1000,1,9999) do if exist %devdir%\compile\%%f.lzh set build=%%f
+
+if "%build%"=="" mkdir %devdir%\compile && echo LLLLLL >%devdir%\compile\1000.lzh && set build=1000
+
 :continue
 set /a build=%build%+1
-mkdir %out%\%build%
+
+
+
 echo Checking for Source
 for %%f in (%initdir%\update;%devdir%;%initdir%\boot) do if not exist %%f set ldir=%%f && goto __error_nosource
 echo 文件树完整
@@ -49,14 +54,13 @@ call %apidir%\make_bootimg.bat %proc%\boot.img
 echo y | copy %proc%\boot.img %proc%\AFT\boot.img
 if exist %proc%\recovery.img echo y | copy %proc%\recovery.img %proc%\AFT\recovery.img
 if not exist %initdir%\Donor goto __skip_donor
-sha1sum -r %proc%\AFT >>%temp%\sha1_1
 echo 合并固件中...........
 cd /d %initdir%\Donor
 echo     处理合并项目
 for /d %%f in (*) do echo D | xcopy /e /Y %%f %proc%\AFT\system
 if not exist del.list goto __skip_file
 echo     处理删除项目/文件
-for /f %%f in (del.list) do del %proc%\AFT\%%f
+for /f %%f in (del.list) do echo 删除:%proc%\AFT\%%f && del %proc%\AFT\%%f
 :__skip_file
 if not exist rmdir.list goto __skip_dir
 echo	处理删除项目/目录
@@ -69,8 +73,6 @@ type build_extend.prop>%proc%\AFT\system\build.prop
 type build.prop>>%proc%\AFT\system\build.prop
 )
 echo 合成结束
-sha1sum -r %proc%\AFT >>%temp%\sha1_2
-fc %temp%\sha1_2 %temp%\sha1_1 >%log%\%build%.diff
 :__skip_donor
 if "%global_zipalign_skip%"=="true" goto __skip_zipalig
 echo 正在进行Zipalign优化
@@ -138,32 +140,25 @@ if exist %initdir%\update.zip del %initdir%\update.zip
 cd /d %proc%\AFT
 if "%sign_file_update%"=="true" (
 if exist %proc%\update.zip del %proc%\update.zip
-zip a -slp %proc%\update.zip *
+zip a -slp -r %proc%\update.zip *
 echo 正在签名update.zip..................
 java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 %proc%\update.zip %initdir%\update.zip
 )
 if not "%sign_file_update%"=="true"  zip a -slp %initdir%\update.zip *
 cd /d %initdir%
 echo 正在清空缓存
-rmdir /q /s %proc%\AFT
+
 echo 三路并行创建备份
-if not "%skip_backup%"=="true" (
-echo 创建:%out%\%build%\compile_tool.7z			设备配置文档
-start /MIN zip a %out%\%build%\compile_tool.7z %devdir%  -t7z
-echo 创建:%out%\%build%\update_original.zip		固件镜像源
-if not exist %initdir%\update\update_cache.zip start /MIN zip a %out%\%build%\update_original.zip %initdir%\update  
-echo 创建:%out%\%build%\boot_image.7z			设备Boot.img压缩镜像
-start /MIN zip a %out%\%build%\boot_image.7z %initdir%\boot  -t7z
-echo 创建:%out%\%build%\Donor.zip			合成工程项目文件
-if exist %initdir%\Donor start /MIN zip a %out%\%build%\Donor.zip %initdir%\Donor  
-echo 创建:%out%\%build%\reocovery.7z			设备Recovery.img压缩镜像
-if exist %initdir%\recovery start /MIN zip a %out%\%build%\recovery.7z %initdir%\recovery
-echo 创建:%out%\%build%\update.zip			输出文件
-copy %initdir%\update.zip %out%\%build%\update.zip
-if exist %initdir%\update\update_cache.zip copy %initdir%\update\update_cache.zip %out%\%build%\update_original.zip
-)
+
+if "%ro_skip_backup%"=="true" goto over
+
+start /MIN %apidir%\make_mkp_wim.bat 
+echo %build%>%devdir%\compile\%build%.lzh
+:over
 echo 生成结束
 goto end
+
+
 
 
 
