@@ -22,6 +22,7 @@ set error_code=0x0000000A
 set initdir=%cd%
 set sdkdir=%initdir%\%1
 set kernel=%sdkdir%\kernel
+::set path=%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
 set path=%windir%\system32;%windir%
 set userdir=%initdir%\User
 set user_dir=%userdir%

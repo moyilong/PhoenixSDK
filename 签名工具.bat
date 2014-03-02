@@ -1,1 +1,0 @@
-call sys\kernel\bootable\sign.bat sys
