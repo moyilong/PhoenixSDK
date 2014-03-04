@@ -1,0 +1,10 @@
+mainmenu "ELONE Phenom Kernel Configure"
+
+menu "Kernel Configure"
+source "kernel_phenom.kcfg"
+endmenu
+
+menu "APP SDK Configure"
+source "sdk_configure.kcfg"
+endmenu
+

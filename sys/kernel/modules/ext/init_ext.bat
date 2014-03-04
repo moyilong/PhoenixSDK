@@ -34,7 +34,7 @@ if exist %appdir%\%1\api_dir echo D | xcopy /Y /E %appdir%\%1\api %api_dir%
 if exist init.bat call init.bat Kernel_Init
 if not exist %proc%\shutdown_code mkdir %proc%\shutdown_code
 if exist shutdown_code.bat copy shutdown_code.bat %proc%\shutdown_code\%1
-
+if exist APPCFG.kcfg copy APPCFG.kcfg %proc%\kcfg\%return_name%.kcfg
 set feature=%feature%;%1
 set ext_pkg=%1;%ext_pkg%
 echo º”‘ÿΩ· ¯!

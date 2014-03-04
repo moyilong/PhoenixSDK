@@ -1,0 +1,26 @@
+config debug
+	bool "Enable Kernel Debug"
+	default n
+	help
+	"Enable Kernel Debuf Boolean to display more info"
+
+config ro_kernel_compressed
+	default n
+	bool "Enable Compress kernel path"
+
+config skip_kernel_check
+	default n
+	bool "Disable Kernel Secure Modules"
+	select skip_appcheck
+	select skip_kernelcheck
+
+config appload_blacklist
+	string "Kernel Disable Modules List"
+	default ""
+	help 
+	"When app name in there , kernel will skip to load this app"
+
+
+
+
+

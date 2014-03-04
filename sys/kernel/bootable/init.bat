@@ -44,6 +44,10 @@ set sys_log=%log%\Kernel.log
 set apidir=%api_dir%
 set appdir=%sdkdir%\modules
 set lib=%kernel%\lib
+mkdir %proc%\kcfg
+copy %kernel%\kconfig\kernel.cfg %proc%\kcfg\kernel.kcfg
+copy %kernel%\kconfig\kernel_phenom.cfg %proc%\kcfg\kernel_phenom.kcfg
+copy %sdkdir%\include\config.cfg %proc%\kcfg\sdk_configure.kcfg
 echo.
 echo.
 set error_code=0xE00003DA
@@ -162,6 +166,7 @@ zip x modules_compress.zip
 set appdir=%proc%\modules
 )
 call %kernel%\app_loader.bat
+
 :skip_appload2
 if exist %sdkdir%\bin set PATH=%sdkdir%\bin;%PATH%
 if "%HOST_ARCH%"=="x86" if exist %sdkdir%\bin32 set PATH=%sdkdir%\bin32;%PATH%
