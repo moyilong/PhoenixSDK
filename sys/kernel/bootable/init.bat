@@ -59,7 +59,7 @@ if "%force_run_for_other%"=="true" goto otr_set
 echo   Checking Enviroment
 echo     initdir=%initdir%
 echo     sdkdir=%sdkdir%
-echo     kernel=%kernel%
+echo     kernel=%kernel% 
 echo     userdir=%userdir%
 echo Checking Kernel Configure Files
 for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f goto head_error
