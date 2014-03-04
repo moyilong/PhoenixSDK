@@ -23,7 +23,7 @@ RegEx.Pattern = "^.*?" & temp1 & "[""\s]*" & temp2 & """?\s*"
 args = RegEx.Replace(cmdline, "") 
 'WScript.Echo file, args 
 else 
-file = "init.bat" 
+file = "sys\init.bat" 
 'args = "/k cd /d """ & CreateObject("WScript.Shell").CurrentDirectory & Chr(34) 
 end if 
 'ºËÐÄ´úÂë 
