@@ -36,6 +36,7 @@ mkdir %api_dir%
 mkdir %proc%\temp
 mkdir %proc%\ver_info
 mkdir %proc%\shutdown_code
+
 set cmdline=%2;%3;%4;%5;%6;%7;%8
 set log=%proc%\LogFiles
 mkdir %log%
@@ -44,10 +45,6 @@ set sys_log=%log%\Kernel.log
 set apidir=%api_dir%
 set appdir=%sdkdir%\modules
 set lib=%kernel%\lib
-mkdir %proc%\kcfg
-copy %kernel%\kconfig\kernel.cfg %proc%\kcfg\kernel.kcfg
-copy %kernel%\kconfig\kernel_phenom.cfg %proc%\kcfg\kernel_phenom.kcfg
-copy %sdkdir%\include\config.cfg %proc%\kcfg\sdk_configure.kcfg
 echo.
 echo.
 set error_code=0xE00003DA
@@ -59,9 +56,10 @@ if "%force_run_for_other%"=="true" goto otr_set
 echo   Checking Enviroment
 echo     initdir=%initdir%
 echo     sdkdir=%sdkdir%
-echo     kernel=%kernel% 
+echo     kernel=%kernel%
 echo     userdir=%userdir%
 echo Checking Kernel Configure Files
+
 for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f goto head_error
 for %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do if not exist %%f goto head_error
 echo                     Reading Kernel Head file
@@ -94,13 +92,18 @@ if not "%errorlevel%"=="0" if not "%skip_kernelcheck%"=="true" goto hash_error
 del %temp%\k_hash.dll
 echo	Reading Sign Information
 for /f "delims=#" %%f in (%sdkdir%\include\sign.h) do set %%f
-
 set k_string=unknow
 if "%k_mode%"=="Pre-Alpha" set k_string=ø™∑¢‘§¿¿∞Ê
 if "%k_mode%"=="Alpha" set k_string=ƒ⁄≤ø≤‚ ‘∞Ê
 if "%k_mode%"=="Beta" set k_string=≤‚ ‘∞Ê
 if "%k_mode%"=="Release" set k_string=’˝ Ω∞Ê
 if "%k_mode%"=="RC" set k_string=∑¢≤º‘§¿¿∞Ê
+
+
+
+
+
+
 set HOST_ARCH=x86
 if exist %windir%\SysWOW64  set HOST_ARCH=amd64
 set title=%name% with %k_version%
@@ -147,6 +150,12 @@ if "%%f"=="fr" set force_ARCH=true
 if "%%f"=="tl" title %title%
 if "%%f"=="ni" set not_init=true
 )
+
+mkdir %proc%\kcfg
+copy %kernel%\kcfg\kernel.txt %proc%\kcfg\kernel.kcfg
+copy %kernel%\kcfg\phenom.txt %proc%\kcfg\kernel_phenom.kcfg
+copy %sdkdir%\include\config.cfg %proc%\kcfg\sdk_configure.kcfg
+
 if "%force_ARCH%"=="true" set HOST_ARCH=%force_HOST_ARCH%
 if  "%HOST_ARCH%"=="amd64" set PATH=%kernel%\kernel_bin_64;%PATH%
 if  "%HOST_ARCH%"=="x86" set PATH=%kernel%\kernel_bin_32;%PATH%
@@ -168,6 +177,8 @@ set appdir=%proc%\modules
 call %kernel%\app_loader.bat
 
 :skip_appload2
+
+
 if exist %sdkdir%\bin set PATH=%sdkdir%\bin;%PATH%
 if "%HOST_ARCH%"=="x86" if exist %sdkdir%\bin32 set PATH=%sdkdir%\bin32;%PATH%
 if "%HOST_ARCH%"=="amd64" if exist %sdkdir%\bin64 set PATH=%sdkdir%\bin64;%PATH%
