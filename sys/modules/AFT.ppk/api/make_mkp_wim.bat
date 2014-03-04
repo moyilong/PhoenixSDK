@@ -18,10 +18,4 @@ if not exist %intidir%\update\update_cahce.zip if exist %initdir%\update echo D 
 echo 正在生成WIM文件
 move %proc%\AFT %proc%\wim_maker\update_final
 cd /d %proc%
-hzip a IMAGE_BUILD.wim wim_maker -twim -r
-echo 正在合并WIM
-imagex /export %proc%\IMAGE_BUILD.wim 1 %out%\image_build.wim "AFT Backup Image Build%build%"
-cd /d %initdir%
-if exist %proc%\AFT rmdir /q /s %proc%\AFT
-if exist %proc%\wim_maker rmdir /q /s %proc%\wim_maker
-exit
+imagex /capture wim_maker %out%\image_build "AFT Backup Image %build%"
