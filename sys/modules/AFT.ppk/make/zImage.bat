@@ -37,6 +37,9 @@ goto __donor_start
 :__compress_update
 echo 正在解压缩预编译固件..........
 zip x %initdir%\update\update_cache.zip -o%proc%\AFT
+if not exist %proc%\wim_maker mkdir %proc%\wim_maker
+echo D | xcopy /e %proc%\AFT %proc%\wim_maker\update_origin
+
 
 
 if not exist %initdir%\recovery goto __skip_recovery

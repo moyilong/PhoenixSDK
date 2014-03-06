@@ -12,3 +12,4 @@ call %appdir%\AFT.ppk\api\devices_read.bat
 taskkill /f /t /im tadb.exe
 set bs=%provider% for %device% with %m_os% at %m_cf% signed key %sign_key% buid with %k_version%
 
+start %appdir%\AFT.ppk\dialog\dev_list.bat %proc%
