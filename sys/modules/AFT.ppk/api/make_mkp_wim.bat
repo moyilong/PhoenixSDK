@@ -10,5 +10,8 @@ echo D | xcopy /e %devdir% %proc%\wim_maker\compile_config
 echo 正在生成WIM文件
 move %proc%\AFT %proc%\wim_maker\update_final
 cd /d %proc%
-imagex /capture wim_maker %out%\image_build.wim "AFT Backup Image %build%"
+imagex /capture wim_maker temp.wim "AFT Backup Image %build%"
+imagex /export temp.wim 1 %out%\image_build.wim "AFT Backup Image %build%"
+del temp.wim
+rmdir /q /s wim_maker
 exit
