@@ -9,7 +9,8 @@ echo            ___         ___                ___
 echo          /      /     /   /   /\    /   /     Dragon Project 
 echo         /----  /     /   /   /  \  /   /----  Kernel Init   
 echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2014     
-echo.                                                   
+echo.                    
+
 set error_code=0x00000001
 doskey wait=ping 127.0.0.1 -n 2 >nul
 doskey cat=type
@@ -22,7 +23,6 @@ set error_code=0x0000000A
 set initdir=%cd%
 set sdkdir=%initdir%\%1
 set kernel=%sdkdir%\kernel
-::set path=%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
 set path=%windir%\system32;%windir%
 set userdir=%initdir%\User
 set user_dir=%userdir%
@@ -36,10 +36,14 @@ mkdir %api_dir%
 mkdir %proc%\temp
 mkdir %proc%\ver_info
 mkdir %proc%\shutdown_code
-
+mkdir %proc%\service
+mkdir %proc%\service\init
+mkdir %proc%\service\work
+mkdir %proc%\service\disable
 set cmdline=%2;%3;%4;%5;%6;%7;%8
 set log=%proc%\LogFiles
 mkdir %log%
+echo STATUS_START>%proc%\proc.stat
 set app_log=%log%\app.log
 set sys_log=%log%\Kernel.log
 set apidir=%api_dir%
@@ -69,7 +73,12 @@ for /f %%f in (%sdkdir%\include\config.h) do set %%f&& echo Loading Configure: %
 if not exist %sdkdir%\include\info.h set secure_mode=enable&& goto skip_loadhead
 for /f %%f in (%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
 if not exist %userdir%\UserProfile.conf goto set_default_user_conf
-
+mkdir %proc%\kernel
+echo %k_version%>%proc%\kernel\version
+echo %pkg_version%>%proc%\kernel\pkg
+mkdir %proc%\sdk
+echo %version%>%proc%\sdk\version
+echo %name%>%proc%\sdk\name
 :resume_user_conf
 echo                     Reading User Profile
 for /f "delims=#" %%f in (%userdir%\UserProfile.conf) do (
@@ -200,6 +209,7 @@ echo ==============Begin of Enviroment Info================>>%sys_log%
 set >>%sys_log%
 echo ===============End of Enviroment Info=================>>%sys_log%
 if not "%ni%"=="true" call %kernel%\bootable\sys.bat
+echo STATUS_NORMALLY>%proc%\proc.stat
 goto end
 :kpe
 set error_code=0xC000000AA
