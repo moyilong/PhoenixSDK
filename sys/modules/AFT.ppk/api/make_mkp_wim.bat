@@ -10,8 +10,14 @@ echo D | xcopy /e %devdir% %proc%\wim_maker\compile_config
 echo 正在生成WIM文件
 move %proc%\AFT %proc%\wim_maker\update_final
 cd /d %proc%
-imagex /capture wim_maker temp.wim "AFT Backup Image %build%"
+imagex /capture wim_maker temp.wim "AFT Backup Image %build%" /COMPRESS %wim_compress%
 imagex /export temp.wim 1 %out%\image_build.wim "AFT Backup Image %build%"
+echo =================Android Firmware Tool %build%===========>>%out%\hash_table.sha1
+echo Build ID %build% ai %date% %time%>>%out%\hash_table.sha1
+sha1sum -r wim_maker >>%out%\hash_table.sha1
+echo =================Android Firmware Tool %build%===========>>%out%\hash_table.sha1
 del temp.wim
 rmdir /q /s wim_maker
+cd /d %out%
+sha1sum hash_table.sha1 >hash_table_check_hash.sha1
 exit

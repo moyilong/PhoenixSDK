@@ -34,6 +34,7 @@ set error_code=0xE1000105
 rmdir /q /s %proc%
 set error_code=0xEfffffff
 doskey exit=
+set kernel_stat=exit
 echo Kernel Exit!
                                               
 

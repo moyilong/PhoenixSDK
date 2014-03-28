@@ -1,23 +1,29 @@
 @echo off
+title Android Firmware Tools zImage Maker [Reading..]
 echo zip Update Maker 2
+echo [HOST] Read info
 if not "%build%"=="" goto continue
 
-if not exist %devdir%\compile mkdir %devdir%\compile && echo LLLLLL >%devdir%\compile\1000.lzh
+if not exist %devdir%\compile set build=1000
 
 for /l %%f in (1000,1,9999) do if exist %devdir%\compile\%%f.lzh set build=%%f
 
-if "%build%"=="" mkdir %devdir%\compile && echo LLLLLL >%devdir%\compile\1000.lzh && set build=1000
+if "%build%"==""  set build=1000
 
 :continue
+title Android Firmware Tools zImage Maker [Preparing Origin Update]
 set /a build=%build%+1
 
 
+rmdir /q /s %devdir%\compile
+mkdir %devdir%\compile
+echo %build%>%devdir%\compile\%build%.lzh
 
-echo Checking for Source
+echo [HOST] Checking for Source
 for %%f in (%initdir%\update;%devdir%;%initdir%\boot) do if not exist %%f set ldir=%%f && goto __error_nosource
 echo 文件树完整
-if not exist %initdir%\Donor echo 不合并固件
-if not exist %initdir%\recovery echo 不编译Recovery
+if not exist %initdir%\Donor echo 不合并固件 && echo 不合并固件 >>%app_Log%
+if not exist %initdir%\recovery echo 不编译Recovery &&echo 不编译Recovery >>%app_log%
 
 if exist %proc%\AFT rmdir /q /s %proc%\AFT
 
@@ -27,47 +33,54 @@ echo 正在建立缓存
 
 if exist %initdir%\update\update_cache.zip goto __compress_update
 
-echo 正在建立缓存，请稍候..........
-echo D | xcopy /e %initdir%\update %proc%\AFT
+echo [HOST]正在建立缓存，请稍候..........
+echo D | xcopy /e %initdir%\update %proc%\AFT >>%app_log%
 
 goto __donor_start
 
 
 
 :__compress_update
-echo 正在解压缩预编译固件..........
-zip x %initdir%\update\update_cache.zip -o%proc%\AFT
+title Android Firmware Tools zImage Maker [Perpar PreCompress]
+echo [HOST]正在解压缩预编译固件..........
+zip x %initdir%\update\update_cache.zip -o%proc%\AFT >>%app_log%
 if not exist %proc%\wim_maker mkdir %proc%\wim_maker
-echo D | xcopy /e %proc%\AFT %proc%\wim_maker\update_origin
+echo [HOST]正在创建镜像
+echo D | xcopy /e %proc%\AFT %proc%\wim_maker\update_origin>>%app_log%
 
 
 
 if not exist %initdir%\recovery goto __skip_recovery
-echo 正在编译Recovery
+title Android Firmware Tools zImage Maker [Building Recovery]
+echo [TARGET]正在编译Recovery
 cd /d %initdir%
 call %apidir%\make_recovery.bat %proc%\recovery.img
 
 :__skip_recovery
-echo 正在编译Boot
+title Android Firmware Tools zImage Maker [Building Boot]
+echo [TARGET]正在编译Boot
 cd /d %initdir%
 call %apidir%\make_bootimg.bat %proc%\boot.img
 
 
 :__donor_start
+title Android Firmware Tools zImage Maker [Donor Merge]
+echo [TARGET] 合成固件
 echo y | copy %proc%\boot.img %proc%\AFT\boot.img
 if exist %proc%\recovery.img echo y | copy %proc%\recovery.img %proc%\AFT\recovery.img
 if not exist %initdir%\Donor goto __skip_donor
-echo 合并固件中...........
 cd /d %initdir%\Donor
 echo     处理合并项目
 for /d %%f in (*) do echo D | xcopy /e /Y %%f %proc%\AFT\system
 if not exist del.list goto __skip_file
+title Android Firmware Tools zImage Maker [Donor Remove]
 echo     处理删除项目/文件
 for /f %%f in (del.list) do echo 删除:%proc%\AFT\%%f && del %proc%\AFT\%%f
 :__skip_file
 if not exist rmdir.list goto __skip_dir
 echo	处理删除项目/目录
 for /f %%f in (rmdir.list) do rmdir /q /s %proc%\AFT\%%f
+title Android Firmware Tools zImage Maker [Donor Other]
 :__skip_dir
 echo 正在处理其他文件
 if exist build.prop copy build.prop %proc%\AFT\system\build.prop
@@ -77,6 +90,7 @@ type build.prop>>%proc%\AFT\system\build.prop
 )
 echo 合成结束
 :__skip_donor
+title Android Firmware Tools zImage Maker [zipalig]
 if "%global_zipalign_skip%"=="true" goto __skip_zipalig
 echo 正在进行Zipalign优化
 cd /d %proc%
@@ -138,12 +152,13 @@ cd ..
 for /f %%f in (list) do java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 framework\%%f AFT\system\framework\%%f && echo 正在签名:%%f
 rmdir /q /s framework
 :__skip_signapk
+title Android Firmware Tools zImage Maker [making]
 echo 正在生成固件压缩包，请稍候..............
 if exist %initdir%\update.zip del %initdir%\update.zip
 cd /d %proc%\AFT
 if "%sign_file_update%"=="true" (
 if exist %proc%\update.zip del %proc%\update.zip
-zip a -slp -r %proc%\update.zip *
+zip a -slp -r %proc%\update.zip *>>%app_log%
 echo 正在签名update.zip..................
 java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 %proc%\update.zip %initdir%\update.zip
 )
@@ -172,3 +187,4 @@ sleep 5
 goto end
 
 :end
+title %title%

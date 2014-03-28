@@ -1,4 +1,5 @@
 @echo off
+goto end
 call %kernel%\service\regsrv.bat AFT.dialaog.devlist
 call %kernel%\service\set_workmod.bat AFT.dialog.devlist WORK
 mode 36,9

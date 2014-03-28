@@ -10,7 +10,7 @@ echo          /      /     /   /   /\    /   /     Dragon Project
 echo         /----  /     /   /   /  \  /   /----  Kernel Init   
 echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2014     
 echo.                    
-
+doskey #=call %kernel%\
 set error_code=0x00000001
 doskey wait=ping 127.0.0.1 -n 2 >nul
 doskey cat=type

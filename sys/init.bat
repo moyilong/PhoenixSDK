@@ -1,4 +1,4 @@
 @echo off
 cd /d  %~dp0
 cd ..
-call sys\kernel\bootable\bootloader.bat sys
+sys\kernel\bootable\bootloader.bat sys

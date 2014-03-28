@@ -43,3 +43,8 @@ global_bootimg_mkbootimg=aosp
 def_config_sysmode=zip\Normally
 #KeyFile Password
 password=your_password
+#OUTMODE 输出模式(id为自动ID匹配,legency或留空为老式)
+outmode=id
+#定义id
+id=ELCP-mPFFcf14r24dfafas45a7f
+id_name=OUT
