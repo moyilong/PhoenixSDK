@@ -6,7 +6,7 @@ fb6b1c99dd70e3f44eebd00d8478500f *kernel\app_loader.bat
 203b414cdaddb47947f1cbc9c23dfe51 *kernel\bootable\bootloader.bat
 a57b53a3760569ae35ebd590b1c02d4a *kernel\bootable\init.bat
 3320e5ab278045d0c110c132f13e2be1 *kernel\bootable\initrd.bat
-d6ab7e6ab3e2e7ade370be8a9fdc5e46 *kernel\bootable\sign.bat
+cd372e96e33400a0a57e732abfb2a160 *kernel\bootable\sign.bat
 615a9f64fa43dc67f0b0431fb1dc6eb4 *kernel\bootable\sys.bat
 aa3d0c619bd02db4f38dc74429de2704 *kernel\Doc\.xlsx
 6b45d9b79dcba97b4d4636a50fbcb24c *kernel\get_modules.bat
@@ -49,7 +49,7 @@ e4d60b8b9e578d95333dce15f1cf5027 *kernel\lineadd.bat
 2f71171660a38207a4076b1c3a6d91b0 *kernel\modules\ext\init_ext.bat
 2d65f91f791f7db6dd2fda61d5417a42 *kernel\modules\ppk\init_ppk.bat
 05af9144efe5f15f55d4a972f72997fc *kernel\select.bat
-89e7d3a2752f6d7b626ba267001ad468 *kernel\service\exit.bat
+01cca12da9b3ea88cf0f5681039f0358 *kernel\service\exit.bat
 7ddb2bea064dbc820a8bc1d33e563590 *kernel\service\regsrv.bat
 108b2c7e1afdf5579dd73fb01ec0e751 *kernel\service\set_workmod.bat
 f7fbb17a3da82b4dfb9a5860e90b2356 *kernel\sfx\7z.sfx

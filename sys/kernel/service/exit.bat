@@ -29,9 +29,9 @@ for %%f in (%feature%) do if exist %appdir%\%%f\data\exit_code.bat call %appdir%
 for /r %proc%\shutdown_code\ %%f in (*.bat) do call %%f
 pause
 set error_code=0xE1ff00ff
-rmdir /q /s %apidir%
+::rmdir /q /s %apidir%
 set error_code=0xE1000105
-rmdir /q /s %proc%
+::rmdir /q /s %proc%
 set error_code=0xEfffffff
 doskey exit=
 set kernel_stat=exit

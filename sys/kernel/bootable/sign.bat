@@ -17,7 +17,7 @@ echo Hashing Modules
 set k_btime=%date%
 cd modules
 del *.hash
-for /d %%f in (*.ppk) do ..\kernel\signtool\bin32\sum.exe -r %%f>%%f.hash & type %%f.hash
+for /d %%f in (*.EPX;*.K-LIB;*.lib;*.app;kmod-*;*.ppk) do ..\kernel\signtool\bin32\sum.exe -r %%f>%%f.hash & type %%f.hash
 echo Writting Files
 cd ..
 cd include
