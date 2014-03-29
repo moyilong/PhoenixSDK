@@ -1,4 +1,5 @@
 @echo off
+title ELONE PhenomSDK (PhoenixSDK) Init Loader
 echo Reset ErrorCode %error_code% to 0x00000000
 set error_code=0x00000000
 echo.
@@ -159,11 +160,6 @@ if "%%f"=="fr" set force_ARCH=true
 if "%%f"=="tl" title %title%
 if "%%f"=="ni" set not_init=true
 )
-
-mkdir %proc%\kcfg
-copy %kernel%\kcfg\kernel.txt %proc%\kcfg\kernel.kcfg
-copy %kernel%\kcfg\phenom.txt %proc%\kcfg\kernel_phenom.kcfg
-copy %sdkdir%\include\config.cfg %proc%\kcfg\sdk_configure.kcfg
 
 if "%force_ARCH%"=="true" set HOST_ARCH=%force_HOST_ARCH%
 if  "%HOST_ARCH%"=="amd64" set PATH=%kernel%\kernel_bin_64;%PATH%
