@@ -13,7 +13,8 @@ cd /d %proc%
 imagex /capture wim_maker temp.wim "AFT Backup Image %build%" /COMPRESS %wim_compress%
 imagex /export temp.wim 1 %out%\image_build.wim "AFT Backup Image %build%"
 echo =================Android Firmware Tool %build%===========>>%out%\hash_table.sha1
-echo Build ID %build% ai %date% %time%>>%out%\hash_table.sha1
+echo Build ID %build% at %date% %time%>>%out%\hash_table.sha1
+echo Build Script=%bs%
 sha1sum -r wim_maker >>%out%\hash_table.sha1
 echo =================Android Firmware Tool %build%===========>>%out%\hash_table.sha1
 del temp.wim
