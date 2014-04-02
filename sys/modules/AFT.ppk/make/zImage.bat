@@ -71,7 +71,7 @@ if exist %proc%\recovery.img echo y | copy %proc%\recovery.img %proc%\AFT\recove
 if not exist %initdir%\Donor goto __skip_donor
 cd /d %initdir%\Donor
 echo     处理合并项目
-for /d %%f in (*) do if not exist %%f\.del echo D | xcopy /e /Y %%f %proc%\AFT\system
+for /d %%f in (*) do if not exist %%f\__skip echo D | xcopy /e /Y %%f %proc%\AFT\system
 if not exist del.list goto __skip_file
 title Android Firmware Tools zImage Maker [Donor Remove]
 echo     处理删除项目/文件
