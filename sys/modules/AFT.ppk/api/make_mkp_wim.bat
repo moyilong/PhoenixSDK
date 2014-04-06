@@ -3,6 +3,10 @@ mkdir %proc%\wim_maker\boot
 mkdir %proc%\wim_maker\recovery
 mkdir %proc%\wim_maker\Donor
 mkdir %proc%\wim_maker\compile_config
+if exist %initdir%\Dex2Opt (
+mkdir %proc%\wim_maker\Dex2Opt
+echo D | xcopy /e %initdir%\dex2opt %proc%\wim_maker\Dex2Opt
+)
 echo D | xcopy /e %initdir%\boot %proc%\wim_maker\boot
 if exist %initdir%\recovery echo D | xcopy /e %initdir%\recovery %proc%\wim_maker\recovery
 if exist %initdir%\Donor echo D | xcopy /e %initdir%\Donor %proc%\wim_maker\Donor
