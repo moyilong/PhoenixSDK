@@ -20,7 +20,7 @@ mkdir %devdir%\compile
 echo %build%>%devdir%\compile\%build%.lzh
 
 echo [HOST] Checking for Source
-for %%f in (%initdir%\update;%devdir%;%initdir%\boot) do if not exist %%f set ldir=%%f && goto __error_nosource
+for %%f in (%initdir%\update;%devdir%;%initdir%\boot;%initdir%\recovery) do if not exist %%f set ldir=%%f && goto __error_nosource
 echo 文件树完整
 if not exist %initdir%\Donor echo 不合并固件 && echo 不合并固件 >>%app_Log%
 if not exist %initdir%\recovery echo 不编译Recovery &&echo 不编译Recovery >>%app_log%
