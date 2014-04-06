@@ -4,6 +4,6 @@ goto end
 
 :ver_display
 
-echo  %1		%return_name%			%return_version%
+echo  %1		%return_name%
 
 :end
