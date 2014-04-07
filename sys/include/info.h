@@ -1,2 +1,2 @@
-version=9.6.0.0
+version=9.6.6.7
 name=ELONE_Phenom_SDK
