@@ -1,2 +1,0 @@
-if exist %devdir%\vendor_global.bat call %devdir%\vendor_global.bat
-if "%sign_mode%"=="internal" set sign_pem=%appdir%\AFT.ppk\cert\%sign_file%.x509.pem && set sign_pk8=%appdir%\AFT.ppk\cert\%sign_file%.pk8

@@ -1,1 +1,0 @@
-java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 %1 %2 

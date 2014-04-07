@@ -1,1 +1,0 @@
-for /l %%f in (1,1,10000) do echo.
