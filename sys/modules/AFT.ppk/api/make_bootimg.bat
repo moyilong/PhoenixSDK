@@ -6,7 +6,13 @@ cd /d %initdir%\boot
 if exist initrd (
 mkrootfs initrd >ramdisk.cpio
 if exist ramdisk.cpio.gz del ramdisk.cpio.gz
-gzip ramdisk.cpio
+if "%sign_compress_mode%"=="gzip" gzip ramdisk.cpio
+if "%sign_compress_mode%"=="xz"(
+ xz ramdisk.cpio 
+ ren ramdisk.cpio.xz ramdisk.cpio.gz
+)
+
+
 )
 if not exist initrd goto no_ramdisk
 

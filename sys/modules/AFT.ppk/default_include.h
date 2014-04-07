@@ -13,3 +13,5 @@ m_nc=unknow
 m_os=Google Android
 def_config_sysmode=zip\Normally
 wim_compress=fast
+sign_decompress_mode=gzip
+sign_compress_mode=gzip

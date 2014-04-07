@@ -17,4 +17,4 @@ echo finding outdir
 if not "%outmode%"=="id" goto end
 if "%outmode%"=="id" if "%id%"=="" echo Error:Define ID Mode ,not Define ID!>>%app_log% && goto end
 if "%outmode%"=="id" if "%id_name%"=="" echo Error:Define ID Mode ,not Define ID_Name!>>%app_log% && goto end
-for %%f in (%englist%) do if exist %%f\%id_name%\%id%.idf set out=%%f\%id_name%
+for %%f in (%english%) do if exist %%f:\%id_name%\%id%.idf set out=%%f:\%id_name%

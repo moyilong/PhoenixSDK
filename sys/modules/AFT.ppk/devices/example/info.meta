@@ -1,3 +1,7 @@
+#设置解压ramdisk压缩格式
+sign_decompress_mode=gzip
+#设置压缩ramdisk压缩格式
+sign_compress_mode=gzip
 #设置是否签名
 sign_file=true
 #设置签名模式
@@ -23,7 +27,7 @@ donor_mode=release
 #跳过备份标记true为跳过，其他值为备份
 skip_backup=false
 #文件版本标记
-vendor_version=5.7
+vendor_version=6.0
 #全局APK签名开关
 sign_file_globalapk=false
 #Update.zip签名开关
