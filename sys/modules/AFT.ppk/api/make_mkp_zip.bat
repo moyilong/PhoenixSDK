@@ -6,4 +6,4 @@ if exist %initdir%\recovery echo %initdir%\recovery>>%proc%\list
 echo %initdir%\update.zip>>%proc%\list
 if exist %initdir%\update\update_cache.zip echo %initdir%\update\update_cache.zip
 start /MIN zip a %out%\%build%.7z @%proc%\list -t7z
-echo è¾“å‡º%out%\%build%.7z
+echo Êä³ö%out%\%build%.7z
