@@ -14,7 +14,7 @@ fbbd600aa5541397c39423f353c169da *kernel\get_modules.bat
 d380ea9e929296bf9a5bbe94f1c53362 *kernel\help.txt
 de4f3d3890030f61ab1fbbdbbe79225c *kernel\include\config.h
 8d033d3a57eaf7b0b29f1b22a7dea7f5 *kernel\include\Default.conf
-be6bb15849efc39334f25e28683c8455 *kernel\include\head.h
+91197f75ba2491dd9e7b8d9d26a521af *kernel\include\head.h
 6e9ea4d56b54d6e3706b36c41e66bd32 *kernel\include.bat
 3918ea815cdd64f1d748022adc907c2d *kernel\init_app.bat
 08fb92ccd2114a91686191d54809c312 *kernel\ins_process.bat
@@ -23,7 +23,7 @@ be6bb15849efc39334f25e28683c8455 *kernel\include\head.h
 d79329742a49e31bdd248a1841ba1bd0 *kernel\kernel_bin_32\zip.exe
 23b1f50ec64616d53e62586be8190acf *kernel\kernel_bin_64\7z.dll
 dc7d5d97326e520b6c9753a77f774622 *kernel\kernel_bin_64\zip.exe
-3ea295c7c05a4c4d1bebe41fc82b9df0 *kernel\kernel_compress.zip
+56802f129fd45112e85407901efdacb6 *kernel\kernel_compress.zip
 fc32db651375eafc8eb2003c45f957f7 *kernel\kernel_path\black.bat
 74dfc9f027fcd4ae5832f8f4bd13cbc7 *kernel\kernel_path\clean.bat
 0f448fa6c273d75ba15d0f605b05c64e *kernel\kernel_path\cls.bat
