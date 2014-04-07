@@ -1,0 +1,1 @@
+call %api_dir%\make_bootimg.bat %cd%

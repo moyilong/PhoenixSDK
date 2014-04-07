@@ -1,0 +1,86 @@
+
+建议系统配置:
+CPU:600MHZ以上
+内存:至少需要128M的额外内存
+磁盘:32GB 以上剩余空间(安装至少需要64MB的空间)
+
+软件环境:
+Java:JLIB库需要至少Jre6
+Windows:至少是Windows XP
+
+*注意:启用内核的64位模式需要64位的硬件和处理器
+
+环境变量:
+temp=RAMDISK:
+tmp=RAMDISK:
+
+
+
+内置命令:
+adb			Android 调试工具
+fastboot		Android Bootloader调试工具
+help			显示此文本
+reload			重新加载
+version			查看版本号
+mkbootimg		boot.img打包工具
+unpackbootimg		boot.img解包工具
+imagex			Windows Image工具
+sha1sum			Sha1计算(Cygwin)
+sha512sum		Sha512计算(Cygwin)
+unzip			ZIP解压工具(Cygwin)
+zip			ZIP压缩工具(7Z)
+sleep			等待命令
+send			将文件发送到指定的安卓设备上
+pull			从安卓设备获取文件
+
+说明
+make命令:
+
+make [命令] 参数
+
+命令:
+zImage			生成固件 跟ready参数表示缓存固件包
+vendor_setup		读取设备参数
+unpack			解包update.zip
+clean			清空固件
+bootimg			生成boot.img
+menu			启动图形化界面
+config			生成设备配置文件
+
+
+
+
+send命令:
+
+send  [文件id]
+文件id			路径
+update.zip		/sdcard/update.zip
+SystemUI.apk		/system/app
+Settings.apk	 	/system/app
+framework-res.apk	/system/framework
+
+
+
+内核自动载入APP规则:
+文件
+/app/data/name				定义文件名
+/app/data/version			定义版本号
+/app/data/time				定义修改日期
+/app/data/ver_display.bat		定义在检查版本时的代码
+/app/init.bat				定义自动启动代码
+/app/cmd_list				定义拥有的指令集
+/app/exist.lst				定义依赖
+目录
+/app/bin32				32位可执行程序(添加到Path)
+/app/bin64				64位可执行程序(添加到Path)
+/app/path				通用可执行文件(添加到Path)
+/app/path_arm				ARM架构通用可执行文件(添加到Path)
+/app/api				启动时，会将次文件夹下的临时文件和其他模块的
+					api目录合并，添加到变量:%api_dir%
+全局环境变量:
+api_dir					公共混合API目录
+kernel					内核API目录
+
+						
+							
+							
