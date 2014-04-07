@@ -3,21 +3,20 @@ set b_uuid=%random%%random%%random%
 mkdir %temp%\boot_%b_uuid%
 if not exist %initdir%\boot copy %initdir%\update\boot.img %1 & goto end
 cd /d %initdir%\boot
-if exist initrd (
+if not exist initrd goto no_ramdisk
 mkrootfs initrd >ramdisk.cpio
 if exist ramdisk.cpio.gz del ramdisk.cpio.gz
 if "%sign_compress_mode%"=="gzip" gzip ramdisk.cpio
-if "%sign_compress_mode%"=="xz"(
- xz ramdisk.cpio 
- ren ramdisk.cpio.xz ramdisk.cpio.gz
+if "%sign_compress_mode%"=="xz" (
+xz ramdisk.cpio 
+ren ramdisk.cpio.xz ramdisk.cpio.gz
 )
 
-
-)
 if not exist initrd goto no_ramdisk
 
 copy ramdisk.cpio.gz %temp%\boot_%b_uuid%\
 :skip_ramdisk
+:no_ramdisk
 copy boot.img-zImage %temp%\boot_%b_uuid%
 if exist %initdir%\Donor\kernel echo y | copy %initdir%\Donor\kernel %temp%\boot_%b_uuid%\boot.img-zImage
 if exist %initdir%\Donor\zImage echo y | copy %initdir%\Donor\zImage %temp%\boot_%b_uuid%\boot.img-zImage

@@ -6,7 +6,7 @@ cd initrd
 if "%sign_decompress_mode%"=="gzip" gzip -d -c boot.img-ramdisk.gz | cpio -i
 if "%sign_decompress_mode%"=="xz" (
 ren boot.img-ramdisk.gz boot.img-ramdisk.xz
-xz -d -c boot.img-ramdisk.gz | cpio -i
+xz -d -c boot.img-ramdisk.xz | cpio -i
 )
 
 sleep 2
