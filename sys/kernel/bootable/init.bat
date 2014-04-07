@@ -7,9 +7,9 @@ echo.
 echo.
 echo.
 echo            ___         ___                ___
-echo          /      /     /   /   /\    /   /     Dragon Project 
-echo         /----  /     /   /   /  \  /   /----  Kernel Init   
-echo        /____  /___  /___/   /    \/   /____   inside 2010 - 2014     
+echo          /      /     /   /   /\    /   /     
+echo         /----  /     /   /   /  \  /   /----  
+echo        /____  /___  /___/   /    \/   /____   
 echo.                    
 doskey #=call %kernel%\
 set error_code=0x00000001
@@ -168,10 +168,6 @@ echo INITING Modules>>%sys_log%
 set error_code=0xf000000A
 echo 			Scanning Kernel Modules
 if "%secure_mode%"=="enable" goto skip_appload2
-call %kernel%\app_scan.bat
-:skip_appload
-echo 			Loading Kernel Modules
-if "%secure_mode%"=="enable" goto skip_appload2
 if not exist %appdir% if exist %sdkdir%\modules_comress.zip (
 mkdir %proc%\modules
 copy %sdkdir%\modules_compress.zip %proc%\modules\modules_compress.zip
@@ -179,6 +175,11 @@ cd /d %proc%\modules
 zip x modules_compress.zip
 set appdir=%proc%\modules
 )
+call %kernel%\app_scan.bat
+:skip_appload
+echo 			Loading Kernel Modules
+if "%secure_mode%"=="enable" goto skip_appload2
+
 call %kernel%\app_loader.bat
 
 :skip_appload2
