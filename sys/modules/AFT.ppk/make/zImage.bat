@@ -66,12 +66,12 @@ call %apidir%\make_bootimg.bat %proc%\boot.img
 :__donor_start
 title Android Firmware Tools zImage Maker [Donor Merge]
 echo [TARGET] 合成固件
-echo y | copy %proc%\boot.img %proc%\AFT\boot.img
-if exist %proc%\recovery.img echo y | copy %proc%\recovery.img %proc%\AFT\recovery.img
+echo y | copy %proc%\boot.img %proc%\AFT\boot.img  >>%app_log%
+if exist %proc%\recovery.img echo y | copy %proc%\recovery.img %proc%\AFT\recovery.img >>%app_log%
 if not exist %initdir%\Donor goto __skip_donor
 cd /d %initdir%\Donor
 echo     处理合并项目
-for /d %%f in (*) do if not exist %%f\__skip echo D | xcopy /e /Y %%f %proc%\AFT\system
+for /d %%f in (*) do if not exist %%f\__skip echo D | xcopy /e /Y %%f %proc%\AFT\system >>%app_log%
 if not exist del.list goto __skip_file
 title Android Firmware Tools zImage Maker [Donor Remove]
 echo     处理删除项目/文件
@@ -83,7 +83,7 @@ for /f %%f in (rmdir.list) do rmdir /q /s %proc%\AFT\%%f
 title Android Firmware Tools zImage Maker [Donor Other]
 :__skip_dir
 echo 正在处理其他文件
-if exist build.prop copy build.prop %proc%\AFT\system\build.prop
+if exist build.prop copy build.prop %proc%\AFT\system\build.prop >>%app_log%
 if exist build_extend.prop (
 type build_extend.prop>%proc%\AFT\system\build.prop
 type build.prop>>%proc%\AFT\system\build.prop
@@ -162,7 +162,7 @@ zip a -slp -r %proc%\update.zip *>>%app_log%
 echo 正在签名update.zip..................
 java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 %proc%\update.zip %initdir%\update.zip
 )
-if not "%sign_file_update%"=="true"  zip a -slp %initdir%\update.zip *
+if not "%sign_file_update%"=="true"  zip a -slp %initdir%\update.zip *>>%app_log%
 cd /d %initdir%
 echo 正在清空缓存
 
