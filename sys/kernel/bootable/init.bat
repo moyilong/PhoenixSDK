@@ -2,6 +2,9 @@
 title ELONE PhenomSDK (PhoenixSDK) Init Loader
 echo Reset ErrorCode %error_code% to 0x00000000
 set error_code=0x00000000
+set cmdline=%2;%3;%4;%5;%6;%7;%8
+set pre_proc=false
+for %%f in (%cmdline%) do if "%%f"=="spp" set pre_proc=true
 echo.
 echo.
 echo.
@@ -24,12 +27,13 @@ set error_code=0x0000000A
 set initdir=%cd%
 set sdkdir=%initdir%\%1
 set kernel=%sdkdir%\kernel
-set path=%windir%\system32;%windir%
+set path=%windir%\system32;%windir%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0
 set userdir=%initdir%\User
 set user_dir=%userdir%
 set cores=%NUMBER_OF_PROCESSORS%
 set guid=%random%%random%%random%
-set proc=%temp%\tmpfs_%guid%
+if "%pre_proc%"=="true" set proc=%pre_proc_dir%
+if not "%pre_proc%"=="true" set proc=%temp%\tmpfs_%guid%
 set temp=%proc%\temp
 set api_dir=%proc%\common_modules_api
 mkdir %proc%
@@ -41,7 +45,6 @@ mkdir %proc%\service
 mkdir %proc%\service\init
 mkdir %proc%\service\work
 mkdir %proc%\service\disable
-set cmdline=%2;%3;%4;%5;%6;%7;%8
 set log=%proc%\LogFiles
 mkdir %log%
 echo STATUS_START>%proc%\proc.stat

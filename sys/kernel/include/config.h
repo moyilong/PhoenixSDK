@@ -17,3 +17,4 @@ S_CLR=0f
 line_wide=45
 windo_height=100
 debug_info=false
+def_console=cmd.exe
