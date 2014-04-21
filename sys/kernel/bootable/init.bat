@@ -27,7 +27,8 @@ set error_code=0x0000000A
 set initdir=%cd%
 set sdkdir=%initdir%\%1
 set kernel=%sdkdir%\kernel
-set path=%windir%\system32;%windir%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0
+set env_path=%windir%\system32;%windir%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0
+set path=%env_path%
 set userdir=%initdir%\User
 set user_dir=%userdir%
 set cores=%NUMBER_OF_PROCESSORS%
@@ -77,19 +78,13 @@ for /f %%f in (%sdkdir%\include\config.h) do set %%f&& echo Loading Configure: %
 if not exist %sdkdir%\include\info.h set secure_mode=enable&& goto skip_loadhead
 for /f %%f in (%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
 if not exist %userdir%\UserProfile.conf goto set_default_user_conf
+set support-pkgver=%ppk_label%;%ext_label%
 mkdir %proc%\kernel
 echo %k_version%>%proc%\kernel\version
 echo %pkg_version%>%proc%\kernel\pkg
 mkdir %proc%\sdk
 echo %version%>%proc%\sdk\version
 echo %name%>%proc%\sdk\name
-:resume_user_conf
-echo                     Reading User Profile
-for /f "delims=#" %%f in (%userdir%\UserProfile.conf) do (
-echo Loading User Configure: %%f
-if "%1" =="user_conf_disable=true" goto skip_loadhead
-set %%f
-)
 echo 	Progress Configure Dependson
 if "%debug%"=="true" (
 set skip_appcheck=true
@@ -106,6 +101,7 @@ del %temp%\k_hash.dll
 echo	Reading Sign Information
 for /f "delims=#" %%f in (%sdkdir%\include\sign.h) do set %%f
 set k_string=unknow
+
 if "%k_mode%"=="Pre-Alpha" set k_string=开发预览版
 if "%k_mode%"=="Alpha" set k_string=内部测试版
 if "%k_mode%"=="Beta" set k_string=测试版
@@ -118,8 +114,16 @@ if "%k_mode%"=="RC" set k_string=发布预览版
 
 
 set HOST_ARCH=x86
+
 if exist %windir%\SysWOW64  set HOST_ARCH=amd64
 set title=%name% with %k_version%
+:resume_user_conf
+echo                     Reading User Profile
+for /f "delims=#" %%f in (%userdir%\UserProfile.conf) do (
+echo Loading User Configure: %%f
+if "%1" =="user_conf_disable=true" goto skip_loadhead
+set %%f
+)
 echo                     Decoding User PRofile
 set PATHEXT=%PATHEXT%;%user_force_PATHEXT%
 if "%user_force_cpu_core%"=="true" set cores=%user_force_cpu_conf%
@@ -234,8 +238,7 @@ for /f %%f in (%sdkdir%\include\default.conf) do echo %%f>>%userdir%\UserProfile
 echo Importing Kernel Default Configure
 for /f %%f in (%kernel%\include\default.conf) do echo %%f>>%userdir%\UserProfile.conf
 echo #模块设定>>%userdir%\UserProfile.conf
-echo Importing Modules Default Configure
-for %%f in (%feature%) do if exist %appdir%\%%f\data\Default.conf cat  %appdir%\%%f\data\Default.conf > %userdir%\UserProfile.conf
+set modules_defconfig_load=true
 goto resume_user_conf
 :_error
 set error=true

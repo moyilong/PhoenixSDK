@@ -5,9 +5,8 @@ if not exist %appdir%\%1\data\META-INFO echo ´íÎóµÄ°ü:%1>>%sys_log% & set error_
 :load2
 echo Starting Modules
 if not exist %appdir%\%1\data\cmd_list goto skip_load
-for /f %%f in (%appdir%\%1\data\cmd_list) do call %kernel%\ins_process.bat %1 %%f
+for /f %%f in (%appdir%\%1\data\cmd_list) do call %kernel%\modules\ins_process.bat %1 %%f
 
-if exist %appdir%\%1\data\app_config.kcfg %proc%\kcfg\%1.kcfg
 
 :skip_load
 if exist %appdir%\%1\kernel_path_ex copy %appdir%\%1\kernel_path_ex\* %proc%\kernel_path\

@@ -26,7 +26,7 @@ echo 处理需求..................
 for /f %%f in (exist.h) do if not exist %appdir%\%%f set support=false echo [EXT]找不到模块:%%f>>%app_log%&& goto __un_support 
 
 echo 处理指令集.
-for /f %%f in (cmdline.h) do call %kernel%\ins_process.bat %1 %%f
+for /f %%f in (cmdline.h) do call %kernel%\modules\ins_process.bat %1 %%f
 
 echo 普通包事件处理.......
 if exist %appdir%\%1\api_dir echo D | xcopy /Y /E %appdir%\%1\api %api_dir%

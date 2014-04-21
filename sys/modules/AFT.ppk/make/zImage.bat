@@ -75,7 +75,7 @@ for /d %%f in (*) do if not exist %%f\__skip echo D | xcopy /e /Y %%f %proc%\AFT
 if not exist del.list goto __skip_file
 title Android Firmware Tools zImage Maker [Donor Remove]
 echo     处理删除项目/文件
-for /f %%f in (del.list) do echo 删除:%proc%\AFT\%%f && del %proc%\AFT\%%f
+for /f %%f in (del.list) do echo 删除:%proc%\AFT\%%f && call %kernel%\ifdel.bat %proc%\AFT\%%f
 :__skip_file
 if not exist rmdir.list goto __skip_dir
 echo	处理删除项目/目录
