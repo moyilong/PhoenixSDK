@@ -5,4 +5,3 @@ call %kernel%\logo.bat
 call %kernel%\line.bat
 call %kernel%\get_version.bat 
 call %kernel%\line.bat
-sleep 2

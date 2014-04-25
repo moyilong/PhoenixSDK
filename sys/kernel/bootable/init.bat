@@ -165,7 +165,7 @@ if "%%f"=="se" set secure_mode=enable && set error_code=0xffffffff
 if "%%f"=="nkp" set not_path_mode=true
 if "%%f"=="fr" set force_ARCH=true
 if "%%f"=="tl" title %title%
-if "%%f"=="ni" set not_init=true
+if "%%f"=="ni" set not_init=true && set ni=true
 )
 
 if "%force_ARCH%"=="true" set HOST_ARCH=%force_HOST_ARCH%
@@ -212,7 +212,7 @@ set error_code=0xf0000000
 echo ==============Begin of Enviroment Info================>>%sys_log%
 set >>%sys_log%
 echo ===============End of Enviroment Info=================>>%sys_log%
-if not "%ni%"=="true" call %kernel%\bootable\sys.bat
+call %kernel%\bootable\sys.bat
 echo STATUS_NORMALLY>%proc%\proc.stat
 goto end
 :kpe

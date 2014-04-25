@@ -1,6 +1,6 @@
 @echo off
 set bios_loader=EPSDK-BUILT-LDR
-set bios_version=R2
+set bios_version=R5
 if "%start%"=="1" goto end1
 set start=1
 
@@ -70,8 +70,9 @@ goto end
 
 :end
 
-call %1\kernel\bootable\init.bat %1 %cmdline%
-%def_console%
+call %1\kernel\bootable\init.bat %1 %cmdline% %3 %4 %5
+if not "%ni%"=="true" echo Run Console %def_console% && %def_console%
+
 goto end1
 
 :clean_proc
