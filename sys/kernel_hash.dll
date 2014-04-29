@@ -15,7 +15,7 @@ d380ea9e929296bf9a5bbe94f1c53362 *kernel\help.txt
 9351c2044ea6ac20904d8823b01e11d5 *kernel\ifdel.bat
 5ad13faba571ddd35910b14203c8ac4a *kernel\include\config.h
 8d033d3a57eaf7b0b29f1b22a7dea7f5 *kernel\include\Default.conf
-8317da054c3d97c4e34cd0cb41cf35ba *kernel\include\head.h
+f42c5ed36e209a8cc73ebb3fd40df792 *kernel\include\head.h
 6e9ea4d56b54d6e3706b36c41e66bd32 *kernel\include.bat
 3918ea815cdd64f1d748022adc907c2d *kernel\init_app.bat
 3112972cb827a06d7401d783d4c26358 *kernel\kapi\display_logo.txt
@@ -23,12 +23,13 @@ d380ea9e929296bf9a5bbe94f1c53362 *kernel\help.txt
 d79329742a49e31bdd248a1841ba1bd0 *kernel\kernel_bin_32\zip.exe
 23b1f50ec64616d53e62586be8190acf *kernel\kernel_bin_64\7z.dll
 dc7d5d97326e520b6c9753a77f774622 *kernel\kernel_bin_64\zip.exe
-735ee97950366f1ffd77dd3b0f9124cc *kernel\kernel_compress.zip
+600b837e11ff429efebdc1aa718afd91 *kernel\kernel_compress.zip
 bc6359d9133ec1c3276f27fbab4226ef *kernel\kernel_out.ko\path_proc.bat
 821cd37d880b9994af99f0b4cc6dc607 *kernel\kernel_out.ko\process.bat
 fc32db651375eafc8eb2003c45f957f7 *kernel\kernel_path\black.bat
 74dfc9f027fcd4ae5832f8f4bd13cbc7 *kernel\kernel_path\clean.bat
 0f448fa6c273d75ba15d0f605b05c64e *kernel\kernel_path\cls.bat
+bd187b6f4211c0854d29118e38a149b1 *kernel\kernel_path\debug_info.bat
 e2c3d5730258458f4dfbf333deea4351 *kernel\kernel_path\exit_kernel.bat
 2cfc0c131f3b16939be17c7959002968 *kernel\kernel_path\help.bat
 f4ec66984fb979d1ad109eae62a7fa8c *kernel\kernel_path\insmod.bat
