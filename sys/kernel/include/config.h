@@ -19,3 +19,4 @@ windo_height=100
 debug_info=false
 def_console=cmd.exe
 modules_defconfig_load=false
+debug_info=false
