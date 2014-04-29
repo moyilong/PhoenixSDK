@@ -1,61 +1,25 @@
-echo Android Builder Main Feature
-echo Donor ROM Replace 4.x
+echo Android Firmware Tools
+echo Firmware Donor Replace
 echo Useage:
-echo call %apidir%\donor_main.bat {donor_files} {update_folders}
-if not exist %1 goto error_not_donor
-if not exist %2 goto error_not_update
-echo 正在进行包的移植
-cd /d %1
-if not exist %1\debug.list if not exist %1\release.list goto mode_normally
-if not exist %1\debug.list if exist %1\release.list goto mode_release
-if exist %1\debug.list if not exist %1\release.list goto mode_debug
-if exist %1\debug.list if exist %1\release.list if "%donor_mode%"=="release" goto mode_release
-if exist %1\debug.list if exist %1\release.list if "%donor_mode%"=="debug" goto mode_debug
-
-:mode_normally
-for /d %%f in (*) do xcopy /Y /e %1\%%f %2\system
-goto next
-
-:mode_debug
-for /f %%f in (debug.list) do xcopy /Y /e %1\%%f %2\system
-goto next
-
-:mode_release
-for /f %%f in (release.list) do xcopy /Y /e %1\%%f %2\system
-
-:next
-echo 正在处理其他项目
+echo libc donor_main [target]
+cd /d %initdir%\Donor
+echo     处理合并项目
+for /d %%f in (*) do if not exist %%f\__skip echo D | xcopy /e /Y %%f %1\system >>%app_log%
+if not exist del.list goto __skip_file
+title Android Firmware Tools zImage Maker [Donor Remove]
+echo     处理删除项目/文件
+for /f %%f in (del.list) do echo 删除:%1\%%f && call %kernel%\ifdel.bat %1\%%f
+:__skip_file
+if not exist rmdir.list goto __skip_dir
+echo	处理删除项目/目录
+for /f %%f in (rmdir.list) do rmdir /q /s %1\%%f
+title Android Firmware Tools zImage Maker [Donor Other]
+:__skip_dir
+echo 正在处理其他文件
+if exist build.prop copy build.prop %1\system\build.prop >>%app_log%
+if exist build_extend.prop (
+type build_extend.prop>%1\system\build.prop
+type build.prop>>%1\system\build.prop
+)
+echo 合成结束
 cd /d %initdir%
-
-if exist %1\build.prop echo y | copy %1\build.prop %2\system\build.prop
-if exist %1\updater-script echo y | copy %1\updater-script %2\META-INF\com\google\android\updater-script
-
-
-
-if not exist %1\del.list goto skip_del
-echo 正在处理需要删除的项目
-for /f %%f in (%1\del.list) do del %2\%%f && echo RM:%2\%%f>>%app_log%
-
-:skip_del
-
-
-if not exist %1\ren.list goto skip_ren
-echo 正在处理重命名项目
-for /f %%f in (%1\ren.list) do ren %2\%%f %%g &&  echo 重命名:%%f %%g
-
-:skip_ren
-
-echo 合并结束
-goto end
-
-:error_not_donor
-echo %1 not exist
-goto end
-
-:error_not_update
-echo Update File not exist
-echo %2
-goto end
-
-
-:end
