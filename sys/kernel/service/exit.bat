@@ -36,4 +36,5 @@ set error_code=0xEfffffff
 doskey exit=
 set kernel_stat=exit
 echo Kernel Exit!
-                                             
+exit
+exit

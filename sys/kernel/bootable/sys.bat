@@ -1,4 +1,4 @@
-if not "%debug%"=="true" cls
+if not "%debug_info%"=="true" if not "%debug%"=="true" cls
 echo.
 call %kernel%\logo.bat
 ::cls
