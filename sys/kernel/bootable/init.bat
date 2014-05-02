@@ -73,7 +73,7 @@ set reload_file=%sdkdir%\include\info.h;%kernel%\
 for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f goto head_error
 for /f %%f in (%kernel%\include\head.h;%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
 for %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do if not exist %%f goto head_error
-for /f %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do set %%f&& echo Loading Configure: %%f
+for /f %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
 
 if not exist %userdir% mkdir %userdir%
 
