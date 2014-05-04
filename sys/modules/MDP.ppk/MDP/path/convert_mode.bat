@@ -11,6 +11,7 @@ if exist %appdir%\%od_1%\data\exist.lst type %appdir%\%od_1%\data\exist.lst>%tem
 if exist %appdir%\%od_1%\data\init.bat copy %appdir%\%od_1%\data\init.bat %temp%\convert\init.bat
 if exist %appdir%\%od_1%\data\exit_code.bat copy %appdir%\%od_1%\data\exit_code.bat %temp%\convert\shutdown_code.bat
 if exist %appdir%\%od_1%\data\cmd_list copy %appdir%\%od_1%\data\cmd_list %temp%\convert\cmdline.h
+if exist %appdir%\%od_1%\data\default.h copy %appdir%\%od_1%\data\cmd_list %temp%\convert\default.h
 call %kernel%\include.bat %appdir%\%od_1%\data\META-INFO
 echo return_name=%return_name%>%temp%\convert\info.h
 cd /d %temp%\convert
