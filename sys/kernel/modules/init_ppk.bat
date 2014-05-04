@@ -4,6 +4,10 @@ if not exist %appdir%\%1\data\META-INFO echo ´íÎóµÄ°ü:%1>>%sys_log% & set error_
 
 :load2
 echo Starting Modules
+if not exist %appdir%\%1\data\default.h goto load_cmd
+call %kernel%\include.bat %appdir%\%1\data\default.h
+
+:load_cmd
 if not exist %appdir%\%1\data\cmd_list goto skip_load
 for /f %%f in (%appdir%\%1\data\cmd_list) do call %kernel%\modules\ins_process.bat %1 %%f
 
