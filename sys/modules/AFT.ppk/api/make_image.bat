@@ -1,9 +1,9 @@
 echo Bootimg Builder
-echo Useage: libc make_bootimg [target] [recovery/bootimg] [--unused-donor-kernel]
+echo Useage: libc make_bootimg [target] [recovery/boot] [--unused-donor-kernel]
 if "%2"=="" goto _avg_error
 set b_uuid=%random%%random%%random%
 mkdir %temp%\boot_%b_uuid%
-goto _avg_error
+
 cd /d %initdir%\%2
 if not exist initrd goto no_ramdisk
 mkrootfs initrd >ramdisk.cpio
