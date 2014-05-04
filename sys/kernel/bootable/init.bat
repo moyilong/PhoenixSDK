@@ -240,8 +240,6 @@ if not exist %sdkdir%\include\default.conf echo user_conf_disable=false>>%userdi
 echo user_conf_disable=true>>%userdir%\UserProfile.conf
 echo   Importing SDK Default Configure
 for /f %%f in (%sdkdir%\include\default.conf) do echo %%f>>%userdir%\UserProfile.conf
-echo Importing Kernel Default Configure
-for /f %%f in (%kernel%\include\default.conf) do echo %%f>>%userdir%\UserProfile.conf
 echo #Ä£¿éÉè¶¨>>%userdir%\UserProfile.conf
 set modules_defconfig_load=true
 goto resume_user_conf

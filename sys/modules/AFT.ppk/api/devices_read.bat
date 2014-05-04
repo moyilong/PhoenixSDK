@@ -1,7 +1,6 @@
 if not exist %devdir%\info.meta set vendor_exist=false && goto end
 set vendor_exist=true
 echo Importing Default Configure
-call %kernel%\include.bat %appdir%\AFT.ppk\default_include.h
 call %kernel%\include.bat %devdir%\info.meta
 set /p mkbootimg=<%devdir%\dev_cmdline
 set support=fild
