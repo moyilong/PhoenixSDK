@@ -1,3 +1,5 @@
 @echo off
 echo ADB Private Device Setting
-set /p android_serial=[ANDROID_SERIAL]
+set /p i=[ANDROID_SERIAL]
+android_serial=%i%
+set i=
