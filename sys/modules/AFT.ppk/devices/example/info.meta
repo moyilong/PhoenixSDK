@@ -52,3 +52,5 @@ outmode=id
 #定义id
 id=ELCP-mPFFcf14r24dfafas45a7f
 id_name=OUT
+#清空模式
+ro_format_system=erase

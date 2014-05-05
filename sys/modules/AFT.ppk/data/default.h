@@ -15,3 +15,4 @@ def_config_sysmode=zip\Normally
 wim_compress=maximum
 sign_decompress_mode=gzip
 sign_compress_mode=gzip
+ro_format_system=erase
