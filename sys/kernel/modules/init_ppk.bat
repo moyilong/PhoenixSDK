@@ -1,9 +1,6 @@
-echo Kernel Phenom Package Kit Util
-
 if not exist %appdir%\%1\data\META-INFO echo ´íÎóµÄ°ü:%1>>%sys_log% & set error_code=0xa000ffff& goto end
 
 :load2
-echo Starting Modules
 if not exist %appdir%\%1\data\default.h goto load_cmd
 call %kernel%\include.bat %appdir%\%1\data\default.h
 
