@@ -3,15 +3,14 @@ echo Useage: libc make_bootimg [target] [recovery/boot] [--unused-donor-kernel]
 if "%2"=="" goto _avg_error
 set b_uuid=%random%%random%%random%
 mkdir %temp%\boot_%b_uuid%
-
+if "%sign_compress_mode%"=="xz" set sign_compress_mode_late=.xz
+if "%sign_compress_mode%"=="gzip" set sign_compress_mode_late=.gz
 cd /d %initdir%\%2
 if not exist initrd goto no_ramdisk
 mkrootfs initrd >ramdisk.cpio
-call %kernel%\ifdel.bat ramdisk.cpio.gz
-call %kernel%\ifdel.bat ramdisk.cpio.xz
+call %kernel%\ifdel.bat ramdisk.cpio%sign_compress_mode%
 %sign_compress_mode% ramdisk.cpio 
-if "%sign_compress_mode%"=="xz" set sign_compress_mode_late=xz
-if "%sign_compress_mode%"=="gzip" set sign_compress_mode_late=gz
+
 
 
 copy ramdisk.cpio.%sign_compress_mode_late% %temp%\boot_%b_uuid%\
