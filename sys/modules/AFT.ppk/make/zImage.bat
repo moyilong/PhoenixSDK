@@ -52,13 +52,13 @@ echo D | xcopy /e %proc%\AFT %proc%\wim_maker\update_origin>>%app_log%
 
 if not exist %initdir%\recovery goto __skip_recovery
 title Android Firmware Tools zImage Maker [Building Recovery]
-echo [TARGET]正在编译Recovery
+echo [TARGET]Compile Recovery
 cd /d %initdir%
 call %apidir%\make_recovery.bat %proc%\recovery.img
 
 :__skip_recovery
 title Android Firmware Tools zImage Maker [Building Boot]
-echo [TARGET]正在编译Boot
+echo [TARGET]Compile Boot
 cd /d %initdir%
 call %apidir%\make_bootimg.bat %proc%\boot.img
 echo y | copy %proc%\boot.img %proc%\AFT\boot.img  >>%app_log%
