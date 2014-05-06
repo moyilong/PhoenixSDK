@@ -33,7 +33,15 @@ for /f %%f in (cmdline.h) do call %kernel%\modules\ins_process.bat %1 %%f
 
 :gen_proc
 echo 普通包事件处理.......
-if exist %appdir%\%1\api_dir echo D | xcopy /Y /E %appdir%\%1\api %api_dir%
+if not exist %appdir%\%1\api goto __skip_api
+cd /d %appdir%\%1\api
+dir /b >%temp%\flist
+for /f %%f in (%temp%\flist) do (
+echo [%1]Add API:%%F>>%sys_log%
+copy %appdir%\%1\api\%%f %api_dir%\
+)
+cd /d %temp%\%guid%
+:__skip_api
 if exist init.bat call init.bat Kernel_Init
 if not exist %proc%\shutdown_code mkdir %proc%\shutdown_code
 if exist shutdown_code.bat copy shutdown_code.bat %proc%\shutdown_code\%1

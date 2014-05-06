@@ -12,7 +12,15 @@ for /f %%f in (%appdir%\%1\data\cmd_list) do call %kernel%\modules\ins_process.b
 :skip_load
 if exist %appdir%\%1\kernel_path_ex copy %appdir%\%1\kernel_path_ex\* %proc%\kernel_path\
 if exist %appdir%\%1\data\init.bat call %appdir%\%1\data\init.bat Kernel_init
-if exist %appdir%\%1\api echo D | xcopy /Y /E %appdir%\%1\api %api_dir%
+if not exist %appdir%\%1\api goto __skip_api
+cd /d %appdir%\%1\api
+dir /b >%temp%\flist
+for /f %%f in (%temp%\flist) do (
+echo [%1]Add API:%%F>>%sys_log%
+copy %appdir%\%1\api\%%f %api_dir%\
+)
+cd /d %initdir%
+:__skip_api
 set feature=%feature%;%1
 set ppk_pkg=%1;%ppk_pkg%
 echo Add Modules:%1 >>%app_log%
