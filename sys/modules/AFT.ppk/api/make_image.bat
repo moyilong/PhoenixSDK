@@ -6,14 +6,15 @@ mkdir %temp%\boot_%b_uuid%
 if "%sign_compress_mode%"=="xz" set sign_compress_mode_late=.xz
 if "%sign_compress_mode%"=="gzip" set sign_compress_mode_late=.gz
 cd /d %initdir%\%2
+if exist ramdisk.cpio.gz del ramdisk.cpio.gz
+if exist ramdisk.cpio.xz del ramdisk.cpio.xz
 if not exist initrd goto no_ramdisk
 mkrootfs initrd >ramdisk.cpio
-call %kernel%\ifdel.bat ramdisk.cpio%sign_compress_mode%
 %sign_compress_mode% ramdisk.cpio 
 
 
 
-copy ramdisk.cpio.%sign_compress_mode_late% %temp%\boot_%b_uuid%\
+copy ramdisk.cpio%sign_compress_mode_late% %temp%\boot_%b_uuid%\
 :skip_ramdisk
 :no_ramdisk
 copy boot.img-zImage %temp%\boot_%b_uuid%
