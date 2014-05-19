@@ -7,23 +7,21 @@ sign_file=true
 #设置签名模式
 sign_mode=internal
 #设置签名使用的文件 注：新版本只提供PlatformKey
-sign_key=platform
+sign_key=example
 #设置固件开发代号
-provider=SumoMobile 
+provider=example
 #设置设备代号
-device=atlst40 n880e
+device=example
 #设置固件芯片架构
-m_arch=ARM Coretx A9
+m_arch=example
 #设置芯片指令集
-m_cf=ARM-v7a
+m_cf=example
 #设置物理内存
-m_pmem=512
+m_pmem=example
 #设置网卡芯片
-m_nc=BCM 4330
+m_nc=example
 #设置系统类型
-m_os=Google Android
-#设置合成系统模式
-donor_mode=release
+m_os=example
 #跳过备份标记true为跳过，其他值为备份
 skip_backup=false
 #文件版本标记

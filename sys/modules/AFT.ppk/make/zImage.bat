@@ -147,10 +147,7 @@ java -jar %java_dir%\sign.jar %key%.x509.pem %key%.pk8 %proc%\update.zip %initdi
 if not "%sign_file_update%"=="true"  zip a -slp %initdir%\update.zip *>>%app_log%
 cd /d %initdir%
 echo 正在清空缓存
-
-echo 三路并行创建备份
-
-if "%ro_skip_backup%"=="true" goto over
+if "%skip_backup%"=="true" goto over
 
 start /MIN %apidir%\make_mkp_wim.bat 
 echo %build%>%devdir%\compile\%build%.lzh
