@@ -1,0 +1,12 @@
+﻿生成启动时间为 2014/5/13 6:16:35。
+     1>项目“J:\EPSDK\C-Rebuild\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ConsoleApplication1.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>j:\epsdk\c-rebuild\consoleapplication1\consoleapplication1\kernel_info.h(5): error C2513: “kernel_info_ver”: 在“=”前没有声明变量
+     1>j:\epsdk\c-rebuild\consoleapplication1\consoleapplication1\kernel_info.h(5): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
+     1>已完成生成项目“J:\EPSDK\C-Rebuild\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.15

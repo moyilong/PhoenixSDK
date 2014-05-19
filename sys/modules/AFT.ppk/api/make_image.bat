@@ -1,4 +1,15 @@
 echo Bootimg Builder
+echo Checking Remout Get
+if not exist %donor%\ftp_get_zimage goto direct_get
+set /p url=<%donor%\ftp_get_zimage
+if exist %donor%\zImage del %donor%\zImage
+wget %url%
+move zImage %donor%\zImage
+echo SHA1SUM About %url%
+sha1sum %donor%\zImage
+
+
+:direct_get
 echo Useage: libc make_bootimg [target] [recovery/boot] [--unused-donor-kernel]
 if "%2"=="" goto _avg_error
 set b_uuid=%random%%random%%random%
