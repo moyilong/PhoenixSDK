@@ -1,0 +1,20 @@
+﻿生成启动时间为 2014/5/20 21:07:07。
+     1>项目“J:\EPSDK\C-Rebuild\重置\重置\重置.vcxproj”在节点 2 上(build 个目标)。
+     1>PrepareForBuild:
+         正在创建目录“J:\EPSDK\C-Rebuild\重置\Debug\”。
+       InitializeBuildStatus:
+         正在创建“Debug\Kernel.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Kernel.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Kernel.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt convert.c KERNEL.c
+         KERNEL.c
+     1>j:\epsdk\c-rebuild\重置\重置\kernel.c : fatal error C1853: “Debug\Kernel.pch”预编译头文件来自编译器的早期版本，或者预编译头为 C++ 而在 C 中使用它(或相反)
+         convert.c
+     1>j:\epsdk\c-rebuild\重置\重置\convert.c : fatal error C1853: “Debug\Kernel.pch”预编译头文件来自编译器的早期版本，或者预编译头为 C++ 而在 C 中使用它(或相反)
+         正在生成代码...
+     1>已完成生成项目“J:\EPSDK\C-Rebuild\重置\重置\重置.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.91
