@@ -43,8 +43,29 @@ goto __donor_start
 :__compress_update
 title Android Firmware Tools zImage Maker [Perpar PreCompress]
 echo [HOST]正在解压缩预编译固件..........
+if not exist %proc_common%\AFT goto not_cache
+cd %intidir%\update
+sha1sum update_cache.zip %temp%\temp.sha1
+fc %temp%\temp.sha1 %proc_common%\AFT\sha1.sum 
+if not "%error_level%"=="0" goto not_cache
+
+echo 使用缓存的文件...............
+zip x %proc_common%\AFT\cache.zip -o%proc%\AFT >>%app_log%
+goto _cache_over
+
+:not_cache
 zip x %initdir%\update\update_cache.zip -o%proc%\AFT >>%app_log%
 if not exist %proc%\wim_maker mkdir %proc%\wim_maker
+echo [TOOL_BOX]正在创建交换文件...........
+if exist %proc_common%\AFT rmdir /q /s %proc_common%\AFT
+mkdir %proc_common%\AFT
+copy %update%\update\update_cache.zip %proc_common%\AFT\cache.zip
+cd /d %proc_common%\AFT
+sha1sum cache.zip > sha1.sum
+cd /d %initdir%
+
+:_cache_over
+:over
 echo [HOST]正在创建镜像
 echo D | xcopy /e %proc%\AFT %proc%\wim_maker\update_origin>>%app_log%
 
