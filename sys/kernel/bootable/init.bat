@@ -33,6 +33,7 @@ set userdir=%initdir%\User
 set user_dir=%userdir%
 set cores=%NUMBER_OF_PROCESSORS%
 set guid=%random%%random%%random%
+set proc_common=%temp%\tmpfs_common
 if "%pre_proc%"=="true" set proc=%pre_proc_dir%
 if not "%pre_proc%"=="true" set proc=%temp%\tmpfs_%guid%
 set temp=%proc%\temp
@@ -46,7 +47,8 @@ mkdir %proc%\service
 mkdir %proc%\service\init
 mkdir %proc%\service\work
 mkdir %proc%\service\disable
-set log=%proc%\LogFiles
+if not exist %proc_common% mkdir %proc_common%
+set log=%proc_common%\LogFiles_%guid%
 mkdir %log%
 echo STATUS_START>%proc%\proc.stat
 set app_log=%log%\app.log
