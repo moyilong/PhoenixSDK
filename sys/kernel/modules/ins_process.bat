@@ -1,5 +1,4 @@
-echo Kernel Add Command %1 %2>%sys_log%
-echo Kernel Add Command %1 %2
+echo Kernel Add Command %1 %2>>%sys_log%
 set iname=%2
 if not exist %appdir%\%1\%2\sub_version goto direct_load
 set /p t=<%appdir%\%1\%2\sub_version

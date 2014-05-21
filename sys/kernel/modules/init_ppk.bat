@@ -16,7 +16,7 @@ if not exist %appdir%\%1\api goto __skip_api
 cd /d %appdir%\%1\api
 dir /b >%temp%\flist
 for /f %%f in (%temp%\flist) do (
-echo [%1]Add API:%%F>>%sys_log%
+echo [%1]Add API:%%f>>%sys_log%
 copy %appdir%\%1\api\%%f %api_dir%\
 )
 cd /d %initdir%
@@ -26,5 +26,4 @@ set ppk_pkg=%1;%ppk_pkg%
 echo Add Modules:%1 >>%app_log%
 
 :end
-echo Modules Loader End >>%sys_log%
-echo End with Errorcode:%error_code%>>%sys_log%
+echo End Module Load with Errorcode:%error_code%>>%sys_log%
