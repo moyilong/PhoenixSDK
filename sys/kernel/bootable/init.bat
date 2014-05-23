@@ -189,12 +189,13 @@ cd /d %proc%\modules
 zip x modules_compress.zip
 set appdir=%proc%\modules
 )
-call %kernel%\app_scan.bat
+
 :skip_appload
 echo 			Loading Kernel Modules
 if "%secure_mode%"=="enable" goto skip_appload2
 
-call %kernel%\app_loader.bat
+for /d %%n in (*.EPX;*.K-LIB;*.lib;*.app;kmod-*;*.ppk) do call %kernel%\add_feature.bat %%n
+for %%h in (%feature_x%) do call %kernel%\init_app.bat %%h && echo Load:%%h >>%app_log% 
 
 :skip_appload2
 
