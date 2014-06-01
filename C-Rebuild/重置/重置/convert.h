@@ -1,1 +1,0 @@
-LPCWSTR	char_to_lpcw(char *szStr);

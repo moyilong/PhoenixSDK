@@ -193,13 +193,13 @@ set appdir=%proc%\modules
 :skip_appload
 echo 			Loading Kernel Modules
 if "%secure_mode%"=="enable" goto skip_appload2
-
+cd /d %appdir%
 for /d %%n in (*.EPX;*.K-LIB;*.lib;*.app;kmod-*;*.ppk) do call %kernel%\add_feature.bat %%n
-for %%h in (%feature_x%) do call %kernel%\init_app.bat %%h && echo Load:%%h >>%app_log% 
+for %%h in (%feature_x%) do call %kernel%\init_app.bat %%h && echo Load:%%h >>%sys_log% 
 
 :skip_appload2
 
-
+cd /d %initdir%
 if exist %sdkdir%\bin set PATH=%sdkdir%\bin;%PATH%
 if "%HOST_ARCH%"=="x86" if exist %sdkdir%\bin32 set PATH=%sdkdir%\bin32;%PATH%
 if "%HOST_ARCH%"=="amd64" if exist %sdkdir%\bin64 set PATH=%sdkdir%\bin64;%PATH%
