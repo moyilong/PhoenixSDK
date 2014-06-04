@@ -159,6 +159,8 @@ title Android Firmware Tools zImage Maker [making]
 echo 正在生成固件压缩包，请稍候..............
 if exist %initdir%\update.zip del %initdir%\update.zip
 cd /d %proc%\AFT
+echo %bs% %date% %time% >system\etc\build_subinfo.s
+sha1sum -r . >system\etc\build_subinfo.s.sha1sum
 if "%sign_file_update%"=="true" (
 if exist %proc%\update.zip del %proc%\update.zip
 zip a -slp -r %proc%\update.zip *>>%app_log%
