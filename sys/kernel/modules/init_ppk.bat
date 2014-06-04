@@ -10,8 +10,10 @@ for /f %%f in (%appdir%\%1\data\cmd_list) do call %kernel%\modules\ins_process.b
 
 
 :skip_load
-if exist %appdir%\%1\kernel_path_ex copy %appdir%\%1\kernel_path_ex\* %proc%\kernel_path\
+set return_abort_init=false
 if exist %appdir%\%1\data\init.bat call %appdir%\%1\data\init.bat Kernel_init
+if "%return_abort_init%"=="true" call %kernel%\service\app_abort.bat %1 APPLICATION_REPORT_ABORT
+if exist %appdir%\%1\kernel_path_ex copy %appdir%\%1\kernel_path_ex\* %proc%\kernel_path\
 if not exist %appdir%\%1\api goto __skip_api
 cd /d %appdir%\%1\api
 dir /b >%temp%\flist

@@ -8,4 +8,4 @@ set java_dir=%temp%\JEXT
 :end
 echo Checking Java
 for %%f in (%path%) do if exist %%f\java.exe echo Find Java:%%f\java.exe &set exist_java=1
-if not "%exist_java%"=="1" echo 找不到java运行库! &sleep 3
+if not "%exist_java%"=="1" echo 找不到java运行库! &set return_abort_init=true

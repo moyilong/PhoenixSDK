@@ -42,7 +42,9 @@ copy %appdir%\%1\api\%%f %api_dir%\
 )
 cd /d %temp%\%guid%
 :__skip_api
+set return_abort_init=false
 if exist init.bat call init.bat Kernel_Init
+if "%return_abort_init%"=="true" call %kernel%\service\app_abort %1 APPLICATION_REPORT_ABORT
 if not exist %proc%\shutdown_code mkdir %proc%\shutdown_code
 if exist shutdown_code.bat copy shutdown_code.bat %proc%\shutdown_code\%1
 if exist APPCFG.kcfg copy APPCFG.kcfg %proc%\kcfg\%return_name%.kcfg

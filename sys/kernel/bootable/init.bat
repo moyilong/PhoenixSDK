@@ -166,7 +166,7 @@ set path=%proc%\kernel_path;%path%
 if "%debug%"=="true" set title=Debug[%title%]
 echo                     Resume Settings
 for %%f in (%cmdline%) do (
-if "%%f"=="sm" if not "%debug%"=="true" mode %windo_height%,%line_wide%
+if "%%f"=="sm" set sm=true
 if "%%f"=="cl" color %S_clr%
 if "%%f"=="se" set secure_mode=enable && set error_code=0xffffffff
 if "%%f"=="nkp" set not_path_mode=true
@@ -220,6 +220,7 @@ set error_code=0xf0000000
 echo ==============Begin of Enviroment Info================>>%sys_log%
 set >>%sys_log%
 echo ===============End of Enviroment Info=================>>%sys_log%
+if "%sm%"=="true" if not "%debug%"=="true" mode %windo_height%,%line_wide%
 call %kernel%\bootable\sys.bat
 echo STATUS_NORMALLY>%proc%\proc.stat
 goto end
