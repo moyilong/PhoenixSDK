@@ -1,8 +1,5 @@
 echo 关于%name%
 if "%skip_kernelcheck%"=="false" echo 生成日期:%b_time% 
-echo 开发编号:%build_id%
-echo 版本号:%version%
-echo 内核版本:%k_version%
 if "%skip_kernelcheck%"=="false" echo 内核生成时间:%k_time%
 echo 程序包调度:%pkg_Version% API=%api%
 call %kernel%\line.bat
