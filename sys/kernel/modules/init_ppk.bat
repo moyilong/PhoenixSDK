@@ -22,6 +22,7 @@ echo [%1]Add API:%%f>>%sys_log%
 copy %appdir%\%1\api\%%f %api_dir%\
 )
 cd /d %initdir%
+if exist %appdir%\%1\drv_inst call %kernel%\modules\drv_init.bat %1
 :__skip_api
 set feature=%feature%;%1
 set ppk_pkg=%1;%ppk_pkg%

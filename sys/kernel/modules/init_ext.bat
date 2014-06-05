@@ -49,6 +49,7 @@ if not exist %proc%\shutdown_code mkdir %proc%\shutdown_code
 if exist shutdown_code.bat copy shutdown_code.bat %proc%\shutdown_code\%1
 if exist APPCFG.kcfg copy APPCFG.kcfg %proc%\kcfg\%return_name%.kcfg
 if exist default.h call %kernel%\include.bat default.h
+if exist %appdir%\%1\drv_inst call %kernel%\modules\drv_init.bat %1
 set feature=%feature%;%1
 set ext_pkg=%1;%ext_pkg%
 echo º”‘ÿΩ· ¯!

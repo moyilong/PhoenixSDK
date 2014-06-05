@@ -47,6 +47,7 @@ mkdir %proc%\service
 mkdir %proc%\service\init
 mkdir %proc%\service\work
 mkdir %proc%\service\disable
+set drvlist=%proc%\driver_list
 if not exist %proc_common% mkdir %proc_common%
 set log=%proc_common%\LogFiles_%guid%
 mkdir %log%
