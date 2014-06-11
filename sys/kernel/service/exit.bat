@@ -27,7 +27,7 @@ if "%wait%"=="true" goto service
 set error_code=0xa0000fff
 for %%f in (%feature%) do if exist %appdir%\%%f\data\exit_code.bat call %appdir%\%%f\data\exit_code.bat
 for /r %proc%\shutdown_code\ %%f in (*.bat) do call %%f
-pause
+::pause
 set error_code=0xE1ff00ff
 ::rmdir /q /s %apidir%
 set error_code=0xE1000105

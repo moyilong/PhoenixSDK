@@ -70,7 +70,7 @@ goto end
 :end
 
 call %1\kernel\bootable\init.bat %1 %cmdline% %3 %4 %5
-if not "%ni%"=="true" echo Run Console %def_console% && %def_console%
+
 
 goto end1
 

@@ -1,4 +1,5 @@
 @echo off
+
 title ELONE PhenomSDK (PhoenixSDK) Init Loader
 echo Reset ErrorCode %error_code% to 0x00000000
 set error_code=0x00000000
@@ -77,9 +78,14 @@ for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f g
 for /f %%f in (%kernel%\include\head.h;%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
 for %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do if not exist %%f goto head_error
 for /f %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
+set n=0
+::setlocal enabledelayedexpansion
+for /f "skip=%k_version_n%" %%f  in (%kernel%\include\name_tbl) do  set k_version=%%f && echo Loaded K_VERSION=%%f && goto end_loop_1
 
-for /f "skip=%k_version_n%" %%f  in (%kernel%\include\name_tbl) do set k_version=%%f && goto end_loop_1
+ ::pause>nul
 :end_loop_1 
+::setlocal disabledelayedexpansion
+set n=
 if not exist %userdir% mkdir %userdir%
 
 
