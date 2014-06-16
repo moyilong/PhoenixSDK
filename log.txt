@@ -18,3 +18,7 @@
 2014-06-16 21:06:57.992911 [NOTICE] [HttpListenCommand.cc:112] IPv4 RPC: listening on TCP port 6800
 2014-06-16 21:07:20.355191 [ERROR] [download_helper.cc:415] Unrecognized URI or unsupported protocol: ECHO 处于关闭状态。
 2014-06-16 21:07:20.356192 [NOTICE] [HttpListenCommand.cc:112] IPv4 RPC: listening on TCP port 6800
+2014-06-16 21:14:39.916364 [ERROR] [download_helper.cc:415] Unrecognized URI or unsupported protocol: ECHO 处于关闭状态。
+2014-06-16 21:14:39.917364 [NOTICE] [HttpListenCommand.cc:112] IPv4 RPC: listening on TCP port 6800
+2014-06-16 21:15:16.971485 [ERROR] [download_helper.cc:415] Unrecognized URI or unsupported protocol: ECHO 处于关闭状态。
+2014-06-16 21:15:16.973488 [NOTICE] [HttpListenCommand.cc:112] IPv4 RPC: listening on TCP port 6800
