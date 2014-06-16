@@ -18,17 +18,19 @@ start cmd.exe
 :loop
 
 set tm=%time::=_%
-set tm=%tm:~0,-3%
+set tm=%tm:~0,-6%
 set dt=%date:/=_%
 set dt=%dt:~0,-3%
-echo Local Time:%dt%  %tm%
-if exist %server_dir%\task\%dt%\%tm%.bat call %server_dir%\task\%dt%\%tm%.bat
-if exist %server_dir%\task\tm\%tm%.bat call %server_dir%\task\tm\%tm%.bat
+echo 触发时间:%dt%  %tm%
+if exist %server_dir%\task\%dt%\%tm%.bat call %server_dir%\task\%dt%\%tm%.bat >>%sys_log%
+if exist %server_dir%\task\tm\%tm%.bat call %server_dir%\task\tm\%tm%.bat >>%sys_log%
+
+if not exist %server_dir%\task\%dt%\%tm%.bat 没有日期+时间触发项目
+if not exist %server_dir%\task\tm\%tm%.bat echo 没有时间触发项目
 
 
 
 
-
-sleep 1
+sleep 60
 
 goto loop

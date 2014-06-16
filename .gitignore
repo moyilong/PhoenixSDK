@@ -7,3 +7,4 @@ Downloads
 *.pdb
 *.idb
 sys\kernel\src\EPSDK_CPPProject\Debug
+log.txt
