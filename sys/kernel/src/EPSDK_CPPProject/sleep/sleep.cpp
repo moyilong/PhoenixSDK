@@ -7,6 +7,6 @@
 int main(int argc, char* argv[])
 {
 	//int int_tmp = (int)(argv[0] - '0');
-	Sleep(atoi(argv[1]));
+	Sleep(atoi(argv[1])*1000);
 }
 

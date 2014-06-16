@@ -1,0 +1,9 @@
+www
+User
+task
+Downloads
+*.pch
+*.obj
+*.pdb
+*.idb
+sys\kernel\src\EPSDK_CPPProject\Debug

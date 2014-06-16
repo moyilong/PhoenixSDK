@@ -16,7 +16,7 @@ goto end
 
 :copy
 echo Y | copy %temp%\shatmp.ttt %www%\sha_tbl\%%f.shtab
-echo Y | echo D | xcopy /e %appdir%\%1\www %www%
+echo D | xcopy /Y /e %appdir%\%1\www %www%
 goto end
 
 :mklink
