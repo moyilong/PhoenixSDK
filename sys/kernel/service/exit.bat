@@ -14,6 +14,7 @@ doskey ec=call %kernel%\service\set_errorcode.bat
 set error_code=0xE00005DB
 echo 正在结束进程
 echo STATUS_STOP>%proc%\proc.stat
+echo STATUS_STOP>%proc%\stop.stat
 echo 正在结束服务
 cd /d %proc%\service
 :service

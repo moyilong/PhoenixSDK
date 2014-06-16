@@ -1,0 +1,2 @@
+script.per		脚本执行权限
+dataget.per		文件获取权限
