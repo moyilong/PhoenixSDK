@@ -1,6 +1,6 @@
 @echo off
-
 title ELONE PhenomSDK (PhoenixSDK) Init Loader
+if "%bios_debug%"=="true" title ELONE PhenomSDK (PhoenixSDK) Init Loader BIOS-DEBUG!! && pint 127.0.0.1 -n 4>nul
 echo Reset ErrorCode %error_code% to 0x00000000
 set error_code=0x00000000
 set cmdline=%2;%3;%4;%5;%6;%7;%8
@@ -28,7 +28,7 @@ set error_code=0x0000000A
 set initdir=%cd%
 set sdkdir=%initdir%\%1
 set kernel=%sdkdir%\kernel
-set env_path=%windir%\system32;%windir%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0
+set env_path=%windir%\system32;%windir%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0;%kernel%\FMA;%kernel%\utils
 set path=%env_path%
 set userdir=%initdir%\User
 set user_dir=%userdir%
@@ -72,20 +72,20 @@ echo     sdkdir=%sdkdir%
 echo     kernel=%kernel%
 echo     userdir=%userdir%
 echo Checking Kernel Configure Files
-set reload_file=%sdkdir%\include\info.h;%kernel%\
+set reload_file=%sdkdir%\include\info.h;%kernel%\include\head.h
 
-for %%f in (config.h;Default.conf;head.h) do if not exist %kernel%\include\%%f goto head_error
+for %%f in (config.h;Default.conf;head.h;name_tbl) do if not exist %kernel%\include\%%f goto head_error
 for /f %%f in (%kernel%\include\head.h;%kernel%\include\config.h) do set %%f&& echo Loading Configure: %%f
 for %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h;%sdkdir%\kernel_hash.dll) do if not exist %%f goto head_error
 for /f %%f in (%sdkdir%\include\config.h;%sdkdir%\include\info.h) do set %%f&& echo Loading Configure: %%f
-set n=0
-::setlocal enabledelayedexpansion
-for /f "skip=%k_version_n%" %%f  in (%kernel%\include\name_tbl) do  set k_version=%%f && echo Loaded K_VERSION=%%f && goto end_loop_1
 
- ::pause>nul
-:end_loop_1 
-::setlocal disabledelayedexpansion
-set n=
+
+echo Load Kernel Name:%k_verison_n%
+
+FileFileter "%kernel%\include\name_tbl" "%k_verison_n%">%temp%\kname
+set /p k_version=<%temp%\kname
+
+
 if not exist %userdir% mkdir %userdir%
 
 
@@ -132,6 +132,10 @@ if "%k_mode%"=="RC" set k_string=发布预览版
 set HOST_ARCH=x86
 
 if exist %windir%\SysWOW64  set HOST_ARCH=amd64
+if "%HOST_ARCH%"=="x86" (
+echo  警告:对X86不再保证支持!
+pause>nul
+)
 set title=%name% with %k_version%
 :resume_user_conf
 echo                     Reading User Profile

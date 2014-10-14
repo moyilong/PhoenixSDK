@@ -1,0 +1,12 @@
+[__global]
+:1#*password=
+:2#*file=
+[create]
+*country=
+*name=
+*street=
+[check]
+[string]
+*data=
+[destring]
+*data=

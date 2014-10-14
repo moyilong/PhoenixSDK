@@ -1,6 +1,11 @@
 @echo off
+if "%bios_loader%"=="" (
+:bios_setting
 set bios_loader=EPSDK-BUILT-LDR
 set bios_version=R5.1
+)
+if "%bios_version%"=="" goto bios_setting
+
 if "%start%"=="1" goto end1
 set start=1
 

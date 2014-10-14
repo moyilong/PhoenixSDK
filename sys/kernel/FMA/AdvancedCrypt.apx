@@ -1,0 +1,10 @@
+[string]
+*data=
+[filesum]
+*file=
+[dict]
+*file=
+[bench]
+[string_crypt]
+*data=
+[v3_test]

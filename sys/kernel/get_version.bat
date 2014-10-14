@@ -2,6 +2,7 @@ echo 关于%name%
 if "%skip_kernelcheck%"=="false" echo 生成日期:%b_time% 
 if "%skip_kernelcheck%"=="false" echo 内核生成时间:%k_time%
 echo 程序包调度:%pkg_Version% API=%api%
+vecho C++运行库:\v\n
 call %kernel%\line.bat
 if "%debug_info%"=="false" goto __skip
 echo 当前调用核心数:%cores%

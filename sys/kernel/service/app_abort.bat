@@ -8,4 +8,6 @@ echo Why:%2
 echo =====================================
 echo Exit..
 pause>nul
-exit
+
+if not "%bios_debug%"=="true" exit
+if not "%bios_debug%"=="true" cmd

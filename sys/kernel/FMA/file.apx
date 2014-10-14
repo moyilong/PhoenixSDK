@@ -1,0 +1,5 @@
+[__global]
+:1#*input=
+:2#*output=
+verbos=y
+[copy]
