@@ -1,9 +1,12 @@
 @echo off
-title ELONE PhenomSDK (PhoenixSDK) Init Loader
-if "%bios_debug%"=="true" title ELONE PhenomSDK (PhoenixSDK) Init Loader BIOS-DEBUG!! && pint 127.0.0.1 -n 4>nul
+set cmdline=%2;%3;%4;%5;%6;%7;%8
+title ELONE DragonHert Kernel Family -- PhenomSDK Mixed Kernel
+if "%bios_debug%"=="true" title ELONE DragonHert Kernel Family -- PhenomSDK Mixed Kernel Boot Loader BIOS-DEBUG!! && pint 127.0.0.1 -n 4>nul
 echo Reset ErrorCode %error_code% to 0x00000000
 set error_code=0x00000000
-set cmdline=%2;%3;%4;%5;%6;%7;%8
+
+
+
 set pre_proc=false
 for %%f in (%cmdline%) do if "%%f"=="spp" set pre_proc=true
 echo.
@@ -22,7 +25,7 @@ doskey cat=type
 set error_code=0x00000002
 if "%bios_loader%"=="" goto _error
 echo Kernel Init By %bios_loader%
-if "%bios_version%"== goto _error
+if "%bios_version%"=="" goto _error
 echo                 Loading Enviroment Information
 set error_code=0x0000000A
 set initdir=%cd%
@@ -38,6 +41,7 @@ set proc_common=%temp%\tmpfs_common
 if "%pre_proc%"=="true" set proc=%pre_proc_dir%
 if not "%pre_proc%"=="true" set proc=%temp%\tmpfs_%guid%
 set temp=%proc%\temp
+
 set api_dir=%proc%\common_modules_api
 mkdir %proc%
 mkdir %api_dir%
@@ -87,6 +91,8 @@ set /p k_version=<%temp%\kname
 
 
 if not exist %userdir% mkdir %userdir%
+
+
 
 
 
@@ -176,6 +182,16 @@ cd /d %initdir%
 goto final
 :final
 set path=%proc%\kernel_path;%path%
+
+
+
+echo USE EFI Bootloader
+echo Preinit EFI Bootcode
+set error_code=0xB02F9D3A
+call %sdkdir%\kernel\bootable\efi.bat
+
+
+
 if "%debug%"=="true" set title=Debug[%title%]
 echo                     Resume Settings
 for %%f in (%cmdline%) do (
@@ -234,6 +250,9 @@ echo ==============Begin of Enviroment Info================>>%sys_log%
 set >>%sys_log%
 echo ===============End of Enviroment Info=================>>%sys_log%
 if "%sm%"=="true" if not "%debug%"=="true" mode %windo_height%,%line_wide%
+
+
+
 call %kernel%\bootable\sys.bat
 echo STATUS_NORMALLY>%proc%\proc.stat
 goto end

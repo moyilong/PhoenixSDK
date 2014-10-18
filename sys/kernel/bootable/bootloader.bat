@@ -1,11 +1,17 @@
 @echo off
+echo ELONE PhoenixSDK Built-IN Bootloader
+title ELONE PhoenixSDK Built-IN Bootloader
 if "%bios_loader%"=="" (
 :bios_setting
 set bios_loader=EPSDK-BUILT-LDR
-set bios_version=R5.1
+set bios_version=R5.2
 )
-if "%bios_version%"=="" goto bios_setting
+echo BIOS_LOADER=%bios_loader%
 
+::EFI±ê¼Ç
+set USE_EFI_LOADER=true
+
+:_noefi
 if "%start%"=="1" goto end1
 set start=1
 

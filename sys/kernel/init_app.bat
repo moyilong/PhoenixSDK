@@ -1,4 +1,3 @@
-echo Kernel Scanning 
 
 if not exist %user%\black-list.conf goto load
 for /f %%f in (%user%\black-list.conf) do if "%1"=="%%f" echo APP:%1 在黑名单中>>%app_log% &set error_code=0xa00002A5E& goto over
@@ -29,7 +28,9 @@ for %%f in (%ext_label%) do  set error_code=0xaff221fa && if exist %appdir%\%1\p
 
 :over
 
-
+cd /d %appdir%\%1
+for /r %%f in (*.apx) do copy %%f %APX_DIR%\
+cd /d %initdir%
 
 set ppk=
 set ext=
