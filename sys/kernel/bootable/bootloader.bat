@@ -9,7 +9,8 @@ set bios_version=R5.2
 echo BIOS_LOADER=%bios_loader%
 
 ::EFI±ê¼Ç
-set USE_EFI_LOADER=true
+if not exist %1\EFI goto _noefi
+for /f %%f in (%1\EFI\EFI.config) do set %%f
 
 :_noefi
 if "%start%"=="1" goto end1
