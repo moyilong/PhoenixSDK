@@ -8,4 +8,10 @@ set java_dir=%temp%\JEXT
 :end
 echo Checking Java
 for %%f in (%path%) do if exist %%f\java.exe echo Find Java:%%f\java.exe &set exist_java=1
+echo Checking Java for ProgramData
+if exist %programdata%\Oracle\java\javapath\java.exe
+{
+call %kernel%\add_path.bat %programdata%\Oracle\java\javapath;
+set exist_java=1
+}
 if not "%exist_java%"=="1" echo 找不到java运行库! &set return_abort_init=true
