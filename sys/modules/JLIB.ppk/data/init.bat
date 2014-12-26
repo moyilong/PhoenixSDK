@@ -7,11 +7,12 @@ copy %java_dir%\*.jar %temp%\JEXT\
 set java_dir=%temp%\JEXT
 :end
 echo Checking Java
-for %%f in (%path%) do if exist %%f\java.exe echo Find Java:%%f\java.exe &set exist_java=1
+for %%f in (%path%) do if exist %%f\java.exe echo Find Java:%%f\java.exe &set exist_java=1 && set JAVA_PATH=%%f
 echo Checking Java for ProgramData
-if exist %programdata%\Oracle\java\javapath\java.exe
-{
+if exist %programdata%\Oracle\java\javapath\java.exe (
 call %kernel%\add_path.bat %programdata%\Oracle\java\javapath;
+set JAVA_PATH=%programdata%\Oracle\java\javapath
 set exist_java=1
-}
+)
+if "%exist_java%"=="1" echo Java运行时:%JAVA_PATH% && msleep 200
 if not "%exist_java%"=="1" echo 找不到java运行库! &set return_abort_init=true
