@@ -1,5 +1,6 @@
 @echo off
 call %kernel%\line.bat
+cd /d %initdir%
 echo 请将下载的Windows ISO镜像挂载...
 pause
 echo 正在搜寻....
@@ -14,11 +15,6 @@ if "%YN%"=="Y" goto continue
 set /p ISO=请手动指定路径:
 if not exist %ISO%\sources\install.wim echo 找不到%ISO%\sources\install.wim!&& goto handle
 if not exist %ISO%\sources\sxs echo 找不到%ISO%\sources\sxs!&& goto handle
-:set_pathfix
-echo 请制定补丁路径:
-set /p HOT_FIX=[PATH_DIR]=
-if not exist %HOT_FIX%\
-goto set_pathfix
 :continue
 if exist install.wim del install.wim
 echo 正在导出镜像...
@@ -36,7 +32,7 @@ echo 启动NetFX3
 dism /image:%temp%\install /Enable-Feature /Featurename:NetFX3 /source:%ISO%\sources\sxs
 echo 应用镜像
 cd /d %HOT_FIX%
-dism /image:%temp%\install /Add-Package /PackagePath:%HOT_FIX%
+dism /image:%temp%\install /Add-Package /PackagePath:hot_fix
 ::pause>nul
 echo 保存...
 dism /unmount-wim /mountdir:%temp%\install /commit
