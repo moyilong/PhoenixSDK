@@ -168,6 +168,7 @@ if "%host_arch%"=="amd64" call %kernel%\add_path.bat %kernel%\signtool\bin64
 set error_code=0x09905aab
 if not exist %log% mkdir %log%
 mkdir %proc%\kernel_path
+set kernel_path=%proc%\kernel_path
 if "%ro_kernel_compressed%"=="false" if exist %kernel%\kernel_path goto not_compress
 if  "%ro_kernel_compressed%"=="true" goto compress
 :not_compress

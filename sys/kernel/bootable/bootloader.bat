@@ -49,7 +49,7 @@ goto menu1
 
 call %1\kernel\bootable\sign.bat %1
 
-goto end
+goto end1
 
 
 :normally
@@ -80,8 +80,13 @@ set cmdline=se nkp
 goto end
 
 :end
+for /l %%f in (1,1,8) do echo.
+echo                     ELONE inside 
+echo                     ELLDR
 
-call %1\kernel\bootable\init.bat %1 %cmdline% %3 %4 %5
+
+call %1\kernel\bootable\init.bat %1 %cmdline% %3 %4 %5 >nul
+call %kernel_path%\version.bat
 
 
 goto end1
