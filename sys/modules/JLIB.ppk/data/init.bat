@@ -7,5 +7,5 @@ copy %java_dir%\*.jar %temp%\JEXT\
 set java_dir=%temp%\JEXT
 :end
 echo Checking Java
-for %%f in (%path%) do if exist %%f\java.exe echo Find Java:%%f\java.exe &set exist_java=1
-if not "%exist_java%"=="1" echo 找不到java运行库! &set return_abort_init=true
+echo Checking JavaEnv:%JAVA_HOME%
+if not "%JAVA_HOME%"=="" set path=%PATH%;%JAVA_HOME%\bin && echo 使用JAVA_HOME设定:%JAVA_HOME%
