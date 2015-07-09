@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "omp", "omp\omp.vcxproj", "{C7B2093B-738A-4EAE-907C-FEAA2ED224A9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fstream", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{0C253793-12E4-40A4-9451-3C2D84D21C44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7B2093B-738A-4EAE-907C-FEAA2ED224A9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7B2093B-738A-4EAE-907C-FEAA2ED224A9}.Debug|Win32.Build.0 = Debug|Win32
+		{C7B2093B-738A-4EAE-907C-FEAA2ED224A9}.Release|Win32.ActiveCfg = Release|Win32
+		{C7B2093B-738A-4EAE-907C-FEAA2ED224A9}.Release|Win32.Build.0 = Release|Win32
+		{0C253793-12E4-40A4-9451-3C2D84D21C44}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C253793-12E4-40A4-9451-3C2D84D21C44}.Debug|Win32.Build.0 = Debug|Win32
+		{0C253793-12E4-40A4-9451-3C2D84D21C44}.Release|Win32.ActiveCfg = Release|Win32
+		{0C253793-12E4-40A4-9451-3C2D84D21C44}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
